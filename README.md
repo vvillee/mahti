@@ -6,9 +6,10 @@ Kehitysprosessi:
 
 <ol>
 <li>Scrumban kahden viikon sprinteillä</li>
-<li>Tapaaminen kahden viikon välein</li>
-<li>Irkissä kerrotaan muille mitä tehnyt, mitä aikoo tehdä ja onko työn etenemisellä esteitä?</li>
-<li>Tehtävät issueina githubissa ja Trellossa Kanban-taulussa: backlog, planned, work in progress (max. 3), done</li>
+<li>Tapaaminen kahden viikon välein: katselmus, retrospektiivi, suunnittelupalaveri</li>
+<li>Irkissä kerrotaan aina aloittaessaan (ei välttämättä joka päivä) työstämään projektia mitä on tehnyt, mitä aikoo tehdä ja onko työn etenemisellä esteitä</li>
+<li>Pyritään seuraamaan joka päivä kanavan keskustelua</li>
+<li>Tehtävät issueina githubissa ja tarkemmin Trellossa Kanban-taulussa: backlog, planned, work in progress (max. 3), done</li>
 <li>Testivetoinen kehitystapa</li>
 </ol>
 
@@ -30,7 +31,7 @@ On olemassa useita palveluita, joiden avulla tehdään kasvien tunnistusta, mutt
 
 Digiherbaario mobiilisovelluksella ja selainkäyttöliittymällä. Mobiilisovelluksen avulla kuvattujen kasvien siirtäminen ja oman digiherbaarion kerääminen on helppoa! Käyttäjät voivat nähdä muiden käyttäjien havaintoja. Tunnistuksesta voi antaa positiivista tai negatiivista palautetta sen mukaan onko kasvi palautteen antajan mielestä tunnistettu oikein. Kuvista voi myös tykätä.
 
-Tunnistusta ei tarvitse tehdä samalla hetkellä, kun kuva on otettu, vaan kuvan voi laittaa omaan tunnistusjonoon. Tunnistuksen voi tehdä myöhemmin rauhassa kasvion avustuksella. Tunnistus tapahtuu lisäämällä kasville tieteellinen nimi, heimo ja suku. Lisäksi kasville voi syöttää vapaaseen kenttään esimerkiksi kasvin nimen. Mikäli kasvia ei onnistu tunnistamaan, voi sen merkata tunnistamattomaksi, jolloin muut käyttäjät voivat avustaa tunnistusta kommentoimalla kuvaa. Tätä ennen kuva ei ole julkaistu muiden käyttäjien nähtäväksi.
+Tunnistusta ei tarvitse tehdä samalla hetkellä, kun kuva on otettu, vaan kuvan voi laittaa omaan tunnistusjonoon. Tunnistuksen voi tehdä myöhemmin rauhassa kasvion avustuksella. Tunnistus tapahtuu lisäämällä kasville tieteellinen nimi eli heimo, suku ja laji. Lisäksi kasville voi syöttää vapaaseen kenttään esimerkiksi kasvin nimen. Mikäli kasvia ei onnistu tunnistamaan, voi sen merkata tunnistamattomaksi, jolloin muut käyttäjät voivat avustaa tunnistusta kommentoimalla kuvaa. Tätä ennen kuva ei ole julkaistu muiden käyttäjien nähtäväksi.
 
 Käyttäjiä voi halutessaan seurata. Oman profiilin, eli digiherbaarion, voi pitää myös yksityisenä, jolloin seuraamiseen pitää pyytää lupa.
 
