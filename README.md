@@ -8,7 +8,7 @@ Kehitysprosessi:
 <li>Scrumban kahden viikon sprinteillä</li>
 <li>Tapaaminen kahden viikon välein</li>
 <li>Irkissä kerrotaan muille mitä tehnyt, mitä aikoo tehdä ja onko työn etenemisellä esteitä?</li>
-<li>Tehtävät issueina githubissa ja Trellossa Kanban-taulussa: backlog, planned, work in progress, done</li>
+<li>Tehtävät issueina githubissa ja Trellossa Kanban-taulussa: backlog, planned, work in progress (max. 3), done</li>
 <li>Testivetoinen kehitystapa</li>
 </ol>
 
