@@ -2,6 +2,16 @@ Travis: https://travis-ci.org/villvirt/mahti/
 
 [![Coverage Status](https://img.shields.io/coveralls/villvirt/mahti.svg)](https://coveralls.io/r/villvirt/mahti)
 
+Kehitysprosessi:
+
+<ol>
+<li>Scrumban kahden viikon sprinteillä</li>
+<li>Tapaaminen kahden viikon välein</li>
+<li>Irkissä kerrotaan muille mitä tehnyt, mitä aikoo tehdä ja onko työn etenemisellä esteitä?</li>
+<li>Tehtävät issueina githubissa ja Trellossa Kanban-taulussa: backlog, planned, work in progress, done</li>
+<li>Testivetoinen kehitystapa</li>
+</ol>
+
 Aihekuvaus:
 
 <h1>Herbarium - Digiherbaario</h1>
