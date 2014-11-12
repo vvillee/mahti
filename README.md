@@ -1,11 +1,11 @@
-Käynnistä:
+Käynnistä (http://localhost:8080):<br/>
 mvn spring-boot:run
 
-Testaa:
+Testaa:<br/>
 mvn test
 
-CI:
-Travis: https://travis-ci.org/villvirt/mahti/
+Travis(CI):<br/>
+https://travis-ci.org/villvirt/mahti/
 
 [![Coverage Status](https://img.shields.io/coveralls/villvirt/mahti.svg)](https://coveralls.io/r/villvirt/mahti)
 
