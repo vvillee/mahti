@@ -17,8 +17,14 @@ public class DefaulController {
     @RequestMapping(method = RequestMethod.GET)
     public String view(Model model) {
         model.addAttribute("name", defaultService.getName());
-	// Tämä ei toimi, koska <small> tageihin ei voi laittaa thymeleaffiä?
-        model.addAttribute("secondaryName", "Jotain aivan upeaa!");
+        model.addAttribute("description", defaultService.getDescription());
         return "index";
+    }
+    
+    @RequestMapping(value ="login",method = RequestMethod.GET)
+    public String login(Model model) {
+        model.addAttribute("name", defaultService.getName());
+        model.addAttribute("description", defaultService.getDescription());
+        return "login";
     }
 }

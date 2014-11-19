@@ -12,8 +12,15 @@ public class DefaultService {
     
     @Value("${name}")
     private String name;
+    
+    @Value("${description}")
+    private String description;
 
     public String getName(){
         return name;
+    }
+    
+    public String getDescription(){
+        return description;
     }
 }
