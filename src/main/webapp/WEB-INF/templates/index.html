@@ -53,6 +53,9 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
+			<a href="#login" data-toggle="modal">Log in</a>
+                    </li>
+                    <li>
                         <a href="#">About</a>
                     </li>
                     <li>
@@ -207,6 +210,51 @@
 
     </div>
     <!-- /.container -->
+
+    <div class ="modal fade" id = "login" role = "dialog">
+	    <div class ="modal-dialog">
+		 <div class ="modal-content">
+		      <div class ="modal-header">
+			   <h4>Login</h4>
+		      </div>
+			 <div class = "modal-body">
+
+
+
+				 <div th:if="${#httpServletRequest.remoteUser} == null">
+			    
+					 <div th:if="${param.error}">
+						 Invalid username and password.
+					 </div>
+					 <div th:if="${param.logout}">
+						 You have been logged out.
+					 </div>
+					 <form th:action="@{/login}" method="post">
+						 <div><label> User Name : <input type="text" name="username"/> </label></div>
+						 <div><label> Password: <input type="password" name="password"/> </label></div>
+						 <div><input type="submit" value="Sign In"/></div>
+					 </form>
+				 </div>
+				 <div th:if="${#httpServletRequest.remoteUser} != null">
+					 <p th:inline="text">You are logged in as [[${#httpServletRequest.remoteUser}]]<br/>
+						 <a th:href="@{/}">Go home [[${#httpServletRequest.remoteUser}]] &raquo;</a>
+					 </p>
+				
+					 <form th:action="@{/logout}" method="post">
+						 <input type="submit" value="Logout"/>
+					 </form>
+				 </div>
+			 </div>
+
+
+
+			 <div class ="modal-footer">
+				 <a class ="btn btn-default" data-dismiss = "modal"> Cancel </a>
+				 <a class ="btn btn-primary" data-dismiss = "modal"> Ok </a>
+			 </div>
+	         </div>
+            </div>
+    </div>
 
     <!-- jQuery -->
     <script src="../../webapp/static/bootstrap/js/jquery.js"></script>
