@@ -1,75 +1,11 @@
 <!DOCTYPE html>
-<html lang="fi" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-
-    <title>4 Col Portfolio - Start Bootstrap Template</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="../../webapp/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-
-    <!-- Custom CSS -->
-    <link href="../../webapp/static/bootstrap/css/4-col-portfolio.css" rel="stylesheet" />
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-</head>
+<head th:include="fragment/common :: headerFragment" />
 
 <body>
-    <div th:if="${#httpServletRequest.remoteUser} != null">
-        <p th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</p>
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out"/>
-        </form>
-    </div>
-    <div th:if="${#httpServletRequest.remoteUser} == null">
-        <a th:href="@{/login}">Login</a>
-    </div>
-    <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/">Start Bootstrap</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-			<a href="#login" data-toggle="modal">Log in</a>
-                    </li>
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
+
+	<div th:include="fragment/common :: navFragment" />
 
     <!-- Page Content -->
     <div class="container">
@@ -198,69 +134,14 @@
 
         <hr />
 
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
-                </div>
-            </div>
-            <!-- /.row -->
-        </footer>
+        <footer th:include="fragment/common :: footerFragment" />
 
     </div>
     <!-- /.container -->
 
-    <div class ="modal fade" id = "login" role = "dialog">
-	    <div class ="modal-dialog">
-		 <div class ="modal-content">
-		      <div class ="modal-header">
-			   <h4>Login</h4>
-		      </div>
-			 <div class = "modal-body">
+    <div th:include="fragment/common :: dialogFragment" />
+    <div th:cindlue="fragment/common :: scriptFragment" />
 
-
-
-				 <div th:if="${#httpServletRequest.remoteUser} == null">
-			    
-					 <div th:if="${param.error}">
-						 Invalid username and password.
-					 </div>
-					 <div th:if="${param.logout}">
-						 You have been logged out.
-					 </div>
-					 <form th:action="@{/login}" method="post">
-						 <div><label> User Name : <input type="text" name="username"/> </label></div>
-						 <div><label> Password: <input type="password" name="password"/> </label></div>
-						 <div><input type="submit" value="Sign In"/></div>
-					 </form>
-				 </div>
-				 <div th:if="${#httpServletRequest.remoteUser} != null">
-					 <p th:inline="text">You are logged in as [[${#httpServletRequest.remoteUser}]]<br/>
-						 <a th:href="@{/}">Go home [[${#httpServletRequest.remoteUser}]] &raquo;</a>
-					 </p>
-				
-					 <form th:action="@{/logout}" method="post">
-						 <input type="submit" value="Logout"/>
-					 </form>
-				 </div>
-			 </div>
-
-
-
-			 <div class ="modal-footer">
-				 <a class ="btn btn-default" data-dismiss = "modal"> Cancel </a>
-				 <a class ="btn btn-primary" data-dismiss = "modal"> Ok </a>
-			 </div>
-	         </div>
-            </div>
-    </div>
-
-    <!-- jQuery -->
-    <script src="../../webapp/static/bootstrap/js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="../../webapp/static/bootstrap/js/bootstrap.min.js"></script>
 
 </body>
 

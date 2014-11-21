@@ -26,6 +26,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/static/**").permitAll()
+		// nopea väliaikainen ratkaisu kunnes käyttäjäsysteemi saadaan kunnoll valmiiksi
+		.antMatchers("/register").permitAll()
                 .anyRequest().authenticated();
 
         http.formLogin()

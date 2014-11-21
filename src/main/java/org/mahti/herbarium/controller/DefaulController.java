@@ -27,4 +27,11 @@ public class DefaulController {
         model.addAttribute("description", defaultService.getDescription());
         return "login";
     }
+
+    @RequestMapping(value ="register",method = RequestMethod.GET)
+    public String register(Model model) {
+        model.addAttribute("name", "Register");
+        model.addAttribute("description", defaultService.getDescription());
+        return "register";
+    }
 }
