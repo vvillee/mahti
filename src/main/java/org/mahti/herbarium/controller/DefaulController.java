@@ -1,6 +1,5 @@
 package org.mahti.herbarium.controller;
 
-import javax.servlet.http.HttpServletRequest;
 import org.mahti.herbarium.service.DefaultService;
 import org.mahti.herbarium.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
