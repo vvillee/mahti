@@ -8,7 +8,7 @@
     <groupId>org.mahti</groupId>
     <artifactId>herbarium</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <name>Herbarium</name>
     
@@ -117,6 +117,24 @@
                                 </resource>
                             </resources>              
                         </configuration>            
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <!-- Heroku: If your app has any dependencies, the pom.xml file should 
+            include the maven-dependency-plugin. It tells Maven to copy the jar 
+            files that your app depends on to the target/dependency directory. 
+            This way, they are put into the slug, and the .m2 directory can be 
+            removed from the slug.-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.4</version>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals><goal>copy-dependencies</goal></goals>
                     </execution>
                 </executions>
             </plugin>
