@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT $JAVA_OPTS -jar target/herbarium-1.0-SNAPSHOT.jar
+web: java $JAVA_OPTS -Dspring.profiles.active=prod -Dserver.port=$PORT -jar target/*.war
