@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fi" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head th:include="fragment/common :: headerFragment" />
+
+    <body>
+
+        <div th:include="fragment/common :: navFragment" />
+
+        <!-- Page Content -->
+        <div class="container">
+
+            <!-- Page Heading -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Login</h1>
+                    <small>Please log in</small>
+
+                    <div th:if="${#httpServletRequest.remoteUser} == null">
+
+                        <div th:if="${param.error}">
+                            Invalid username and password.
+                        </div>
+                        <div th:if="${param.logout}">
+                            You have been logged out.
+                        </div>
+                        <form th:action="@{/login}" method="post">
+                            <label> User Name : <input type="text" name="username"/> </label><br/>
+                            <label> Password: <input type="password" name="password"/> </label><br/>
+                            <input type="submit" value="Sign In"/>
+                            <p>Don't have an account yet? <a th:href="@{/signup}">Sign up &raquo;</a></p>
+                        </form>
+                    </div>
+                    <div th:if="${#httpServletRequest.remoteUser} != null">
+                        <p th:inline="text">You are logged in as [[${#httpServletRequest.remoteUser}]]<br/>
+                            <a th:href="@{/}">Go home [[${#httpServletRequest.remoteUser}]] &raquo;</a>
+                        </p>
+
+                        <form th:action="@{/logout}" method="post">
+                            <input type="submit" value="Logout"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+
+            <hr />
+            
+            <footer th:include="fragment/common :: footerFragment" />
+
+        </div>
+        <!-- /.container -->
+
+        <div th:include="fragment/common :: dialogFragment" />
+        <div th:cindlue="fragment/common :: scriptFragment" />
+
+    </body>
+
+</html>

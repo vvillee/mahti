@@ -28,7 +28,7 @@ public class DefaultControllerTest {
     
     private final String API_URI = "/";
     
-    @Value("${name}")
+    @Value("${app.name}")
     private String name;
 
     @Autowired
