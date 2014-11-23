@@ -1,282 +1,282 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<head id="headerFragment" th:fragment="headerFragment">
+    <head id="headerFragment" th:fragment="headerFragment">
 
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
 
-    <title>Herbarium</title>
+        <title>Herbarium</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="../../webapp/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+        <!-- Bootstrap Core CSS -->
+        <link href="../../webapp/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
-    <!-- Custom CSS -->
-    <link href="../../webapp/static/bootstrap/css/4-col-portfolio.css" rel="stylesheet" />
+        <!-- Custom CSS -->
+        <link href="../../webapp/static/bootstrap/css/4-col-portfolio.css" rel="stylesheet" />
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
-</head>
+    </head>
 
-<body>
-<div id="navFragment" th:fragment="navFragment">
-    <div th:if="${#httpServletRequest.remoteUser} != null">
-        <p th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</p>
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out"/>
-        </form>
-    </div>
-    <div th:if="${#httpServletRequest.remoteUser} == null">
-        <a th:href="@{/login}">Login</a>
-    </div>
-    <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <body>
+        <div id="navFragment" th:fragment="navFragment">
+<!--            <div th:if="${#httpServletRequest.remoteUser} != null">
+                <p th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</p>
+                <form th:action="@{/logout}" method="post">
+                    <input type="submit" value="Sign Out"/>
+                </form>
+            </div>-->
+            <!-- Navigation -->
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/">Herbarium</a>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li th:if="${#httpServletRequest.remoteUser} == null">
+                                <a th:href="@{/login}" data-toggle="modal">Login</a>
+                            </li>
+                            <li th:if="${#httpServletRequest.remoteUser} != null">
+                                <a th:href="@{/user}" data-toggle="modal" th:inline="text">[[${#httpServletRequest.remoteUser}]]</a>
+                            </li>
+                            <li>
+                                <a href="#">Services</a>
+                            </li>
+                            <li>
+                                <a href="#">Contact</a>
+                            </li>
+                            <li th:if="${#httpServletRequest.remoteUser} != null">
+                                <a href="#" onclick="document.forms['logout'].submit();" data-toggle="modal">Log out</a>
+                            </li>
+                        </ul>
+                        <form name="logout" action="#" th:action="@{/logout}" method="post">
+                            <input type="hidden" value="Sign Out"/>
+                        </form>
+                        <!-- this breaks popup?
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hi User! <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                        <li><a href="#">Preference</a></li>
+                                        <li><a href="#">Sign out</a></li>
+                                </ul>
+                        </li>
+    
+                    </ul>
+                        -->
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+                <!-- /.container -->
+            </nav>
+        </div>
+
+        <!-- Page Content -->
         <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/">Start Bootstrap</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-			<a href="#login" data-toggle="modal">Log in</a>
-                    </li>
-                    <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
-                </ul>
-		    <!-- this breaks popup?
-		<ul class="nav navbar-nav navbar-right">
-		    <li class="dropdown">
-			    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hi User! <b class="caret"></b></a>
-			    <ul class="dropdown-menu">
-				    <li><a href="#">Preference</a></li>
-				    <li><a href="#">Sign out</a></li>
-			    </ul>
-		    </li>
 
-		</ul>
-      -->
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
-</div>
-
-    <!-- Page Content -->
-    <div class="container">
-        
-        <!-- Page Heading -->
-        <div class="row">
-            <div class="col-lg-12">
-                    <h1 class="page-header" th:text="${name}">Application Name</h1>
-                    <small th:text="${description}">Description of the application</small>
-		    <!-- Alla olevassa ei toimi secondaryName, koska h1:ssä oleva thymeleaf tagi korvaa koko h1 osion. -->
-		    <!--
-                <h1 class="page-header" th:text="${name}">Page Heading
-                    <small th:inline="${secondaryName}">Secondary Text</small>
-                </h1>
-      -->
-            </div>
-        </div>
-        <!-- /.row -->
-
-        <!-- Projects Row -->
-        <div class="row">
-            <div class="col-md-3 portfolio-item">
-                <a href="#">
-                    <img class="img-responsive" src="http://placehold.it/750x450" alt="" />
-                </a>
-            </div>
-            <div class="col-md-3 portfolio-item">
-                <a href="#">
-                    <img class="img-responsive" src="http://placehold.it/750x450" alt="" />
-                </a>
-            </div>
-            <div class="col-md-3 portfolio-item">
-                <a href="#">
-                    <img class="img-responsive" src="http://placehold.it/750x450" alt="" />
-                </a>
-            </div>
-            <div class="col-md-3 portfolio-item">
-                <a href="#">
-                    <img class="img-responsive" src="http://placehold.it/750x450" alt="" />
-                </a>
-            </div>
-        </div>
-        <!-- /.row -->
-
-        <!-- Projects Row -->
-        <div class="row">
-            <div class="col-md-3 portfolio-item">
-                <a href="#">
-                    <img class="img-responsive" src="http://placehold.it/750x450" alt="" />
-                </a>
-            </div>
-            <div class="col-md-3 portfolio-item">
-                <a href="#">
-                    <img class="img-responsive" src="http://placehold.it/750x450" alt="" />
-                </a>
-            </div>
-            <div class="col-md-3 portfolio-item">
-                <a href="#">
-                    <img class="img-responsive" src="http://placehold.it/750x450" alt="" />
-                </a>
-            </div>
-            <div class="col-md-3 portfolio-item">
-                <a href="#">
-                    <img class="img-responsive" src="http://placehold.it/750x450" alt="" />
-                </a>
-            </div>
-        </div>
-        <!-- /.row -->
-
-        <!-- Projects Row -->
-        <div class="row">
-            <div class="col-md-3 portfolio-item">
-                <a href="#">
-                    <img class="img-responsive" src="http://placehold.it/750x450" alt="" />
-                </a>
-            </div>
-            <div class="col-md-3 portfolio-item">
-                <a href="#">
-                    <img class="img-responsive" src="http://placehold.it/750x450" alt="" />
-                </a>
-            </div>
-            <div class="col-md-3 portfolio-item">
-                <a href="#">
-                    <img class="img-responsive" src="http://placehold.it/750x450" alt="" />
-                </a>
-            </div>
-            <div class="col-md-3 portfolio-item">
-                <a href="#">
-                    <img class="img-responsive" src="http://placehold.it/750x450" alt="" />
-                </a>
-            </div>
-        </div>
-        <!-- /.row -->
-
-        <hr />
-
-        <!-- Pagination -->
-        <div class="row text-center">
-            <div class="col-lg-12">
-                <ul class="pagination">
-                    <li>
-                        <a href="#">&laquo;</a>
-                    </li>
-                    <li class="active">
-                        <a href="#">1</a>
-                    </li>
-                    <li>
-                        <a href="#">2</a>
-                    </li>
-                    <li>
-                        <a href="#">3</a>
-                    </li>
-                    <li>
-                        <a href="#">4</a>
-                    </li>
-                    <li>
-                        <a href="#">5</a>
-                    </li>
-                    <li>
-                        <a href="#">&raquo;</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!-- /.row -->
-
-        <hr />
-
-        <!-- Footer -->
-        <footer id="footerFragment" th:fragment="footerFragment">
+            <!-- Page Heading -->
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; Mahti 2014</p>
+                    <h1 class="page-header" th:text="${appname}">Application Name</h1>
+                    <small th:text="${appdescription}">Description of the application</small>
                 </div>
             </div>
             <!-- /.row -->
-        </footer>
 
-    </div>
-    <!-- /.container -->
-
-    <div id="dialogFragment" th:fragment="dialogFragment">
-    <div class ="modal fade" id = "login" role = "dialog">
-	    <div class ="modal-dialog">
-		 <div class ="modal-content">
-		      <div class ="modal-header">
-			   <h4>Login</h4>
-		      </div>
-			 <div class = "modal-body">
-
-
-
-				 <div th:if="${#httpServletRequest.remoteUser} == null">
-			    
-					 <div th:if="${param.error}">
-						 Invalid username and password.
-					 </div>
-					 <div th:if="${param.logout}">
-						 You have been logged out.
-					 </div>
-					 <form th:action="@{/login}" method="post">
-						 <div><label> User Name : <input type="text" name="username"/> </label></div>
-						 <div><label> Password: <input type="password" name="password"/> </label></div>
-						 <div><input type="submit" value="Sign In"/></div>
-					 </form>
-				 </div>
-				 <div th:if="${#httpServletRequest.remoteUser} != null">
-					 <p th:inline="text">You are logged in as [[${#httpServletRequest.remoteUser}]]<br/>
-						 <a th:href="@{/}">Go home [[${#httpServletRequest.remoteUser}]] &raquo;</a>
-					 </p>
-				
-					 <form th:action="@{/logout}" method="post">
-						 <input type="submit" value="Logout"/>
-					 </form>
-				 </div>
-			 </div>
-
-
-
-			 <div class ="modal-footer">
-				 <a class ="btn btn-default" data-dismiss = "modal"> Cancel </a>
-				 <a class ="btn btn-primary" data-dismiss = "modal"> Ok </a>
-			 </div>
-	         </div>
+            <!-- Projects Row -->
+            <div class="row">
+                <div class="col-md-3 portfolio-item">
+                    <a href="#">
+                        <img class="img-responsive" src="http://placehold.it/750x450" alt="" />
+                    </a>
+                </div>
+                <div class="col-md-3 portfolio-item">
+                    <a href="#">
+                        <img class="img-responsive" src="http://placehold.it/750x450" alt="" />
+                    </a>
+                </div>
+                <div class="col-md-3 portfolio-item">
+                    <a href="#">
+                        <img class="img-responsive" src="http://placehold.it/750x450" alt="" />
+                    </a>
+                </div>
+                <div class="col-md-3 portfolio-item">
+                    <a href="#">
+                        <img class="img-responsive" src="http://placehold.it/750x450" alt="" />
+                    </a>
+                </div>
             </div>
-    </div>
-    </div>
+            <!-- /.row -->
 
-    <div id="scriptFragment" th:fragment="scriptFragment">
-    <!-- jQuery -->
-    <script src="../../webapp/static/bootstrap/js/jquery.js"></script>
+            <!-- Projects Row -->
+            <div class="row">
+                <div class="col-md-3 portfolio-item">
+                    <a href="#">
+                        <img class="img-responsive" src="http://placehold.it/750x450" alt="" />
+                    </a>
+                </div>
+                <div class="col-md-3 portfolio-item">
+                    <a href="#">
+                        <img class="img-responsive" src="http://placehold.it/750x450" alt="" />
+                    </a>
+                </div>
+                <div class="col-md-3 portfolio-item">
+                    <a href="#">
+                        <img class="img-responsive" src="http://placehold.it/750x450" alt="" />
+                    </a>
+                </div>
+                <div class="col-md-3 portfolio-item">
+                    <a href="#">
+                        <img class="img-responsive" src="http://placehold.it/750x450" alt="" />
+                    </a>
+                </div>
+            </div>
+            <!-- /.row -->
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="../../webapp/static/bootstrap/js/bootstrap.min.js"></script>
-    </div>
+            <!-- Projects Row -->
+            <div class="row">
+                <div class="col-md-3 portfolio-item">
+                    <a href="#">
+                        <img class="img-responsive" src="http://placehold.it/750x450" alt="" />
+                    </a>
+                </div>
+                <div class="col-md-3 portfolio-item">
+                    <a href="#">
+                        <img class="img-responsive" src="http://placehold.it/750x450" alt="" />
+                    </a>
+                </div>
+                <div class="col-md-3 portfolio-item">
+                    <a href="#">
+                        <img class="img-responsive" src="http://placehold.it/750x450" alt="" />
+                    </a>
+                </div>
+                <div class="col-md-3 portfolio-item">
+                    <a href="#">
+                        <img class="img-responsive" src="http://placehold.it/750x450" alt="" />
+                    </a>
+                </div>
+            </div>
+            <!-- /.row -->
 
-</body>
+            <hr />
+
+            <!-- Pagination -->
+            <div class="row text-center">
+                <div class="col-lg-12">
+                    <ul class="pagination">
+                        <li>
+                            <a href="#">&laquo;</a>
+                        </li>
+                        <li class="active">
+                            <a href="#">1</a>
+                        </li>
+                        <li>
+                            <a href="#">2</a>
+                        </li>
+                        <li>
+                            <a href="#">3</a>
+                        </li>
+                        <li>
+                            <a href="#">4</a>
+                        </li>
+                        <li>
+                            <a href="#">5</a>
+                        </li>
+                        <li>
+                            <a href="#">&raquo;</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.row -->
+
+            <hr />
+
+            <!-- Footer -->
+            <footer id="footerFragment" th:fragment="footerFragment">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>Copyright &copy; Mahti 2014</p>
+                    </div>
+                </div>
+                <!-- /.row -->
+            </footer>
+
+        </div>
+        <!-- /.container -->
+
+        <div id="dialogFragment" th:fragment="dialogFragment">
+            <div class ="modal fade" id = "login" role = "dialog">
+                <div class ="modal-dialog">
+                    <div class ="modal-content">
+                        <div class ="modal-header">
+                            <h4>Login</h4>
+                        </div>
+                        <div class = "modal-body">
+
+
+
+                            <div th:if="${#httpServletRequest.remoteUser} == null">
+
+                                <div th:if="${param.error}">
+                                    Invalid username and password.
+                                </div>
+                                <div th:if="${param.logout}">
+                                    You have been logged out.
+                                </div>
+                                <form th:action="@{/login}" method="post">
+                                    <div><label> User Name : <input type="text" name="username"/> </label></div>
+                                    <div><label> Password: <input type="password" name="password"/> </label></div>
+                                    <div><input type="submit" value="Sign In"/></div>
+                                </form>
+                            </div>
+                            <div th:if="${#httpServletRequest.remoteUser} != null">
+                                <p th:inline="text">You are logged in as [[${#httpServletRequest.remoteUser}]]<br/>
+                                    <a th:href="@{/}">Go home [[${#httpServletRequest.remoteUser}]] &raquo;</a>
+                                </p>
+
+                                <form th:action="@{/logout}" method="post">
+                                    <input type="submit" value="Logout"/>
+                                </form>
+                            </div>
+                        </div>
+
+
+
+                        <div class ="modal-footer">
+                            <a class ="btn btn-default" data-dismiss = "modal"> Cancel </a>
+                            <a class ="btn btn-primary" data-dismiss = "modal"> Ok </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="scriptFragment" th:fragment="scriptFragment">
+            <!-- jQuery -->
+            <script src="../../webapp/static/bootstrap/js/jquery.js"></script>
+
+            <!-- Bootstrap Core JavaScript -->
+            <script src="../../webapp/static/bootstrap/js/bootstrap.min.js"></script>
+        </div>
+
+    </body>
 
 </html>

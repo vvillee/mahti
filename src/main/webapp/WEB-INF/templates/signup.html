@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head th:include="fragment/common :: headerFragment" />
+
+    <body>
+
+        <div th:include="fragment/common :: navFragment" />
+
+        <!-- Page Content -->
+        <div class="container">
+
+            <!-- Page Heading -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Sign Up</h1>
+                    <small>Please sign up</small>
+                </div>
+            </div>
+
+            <!-- sign up form -->
+            <div>
+                    <form method="post" action="#" th:action="@{/users}" th:object="${user}">
+                    <label>Email: <input type="text" name="email" placeholder="Email" /></label><br/>
+                    <label>Name: <input type="text" name="name" placeholder="Name" /></label><br/>
+                    <label>Username: <input type="text" name="username" placeholder="Username" /></label><br/>
+                    <label>Password: <input type="password" name="password" placeholder="Password" /></label><br/>
+
+                    <input type="submit" value="sign up" />
+                </form>
+            </div>     
+
+            <footer th:include="fragment/common :: footerFragment" />
+
+        </div>
+        <!-- /.container -->
+
+        <div th:include="fragment/common :: dialogFragment" />
+        <div th:cindlue="fragment/common :: scriptFragment" />
+
+
+    </body>
+
+</html>
