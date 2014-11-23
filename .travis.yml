@@ -6,6 +6,7 @@ jdk:
 after_success:
   - mvn clean cobertura:cobertura coveralls:report
 deploy:
+  provider: heroku
   api_key:
     secure: dliO5y58Vgc6Q5tLSfzqB3h5ONI9gLuyBxDG3RoMBkgBHdRYNvyyoTZKQq/v4Q3nBdO8HHiyFX1Mq1+sKXnq7Bxr6tJ5XBdcFhNb1OMH089OCmPtwY4LZrJrb5BDmiZjWZ3fQ8Bg+X1R036kTz4X9c0q4Uh43PL4cBpfTlNKeRM=
   app: herbarium-app
