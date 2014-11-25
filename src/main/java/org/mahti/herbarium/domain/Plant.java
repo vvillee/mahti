@@ -20,6 +20,9 @@ public class Plant extends AbstractPersistable<Long> {
 
 	@Lob  // tells database to reserve big blocks, optional, runs faster
 	private byte[] content;
+        
+        //link to right table
+        private String username;
 
 	public byte[] getContent() {
 		return content;
@@ -28,4 +31,11 @@ public class Plant extends AbstractPersistable<Long> {
 	public void setContent(byte[] content) {
 		this.content = content;
 	}
+        
+        public void setUser(String user){
+            this.username=user;
+        }
+        public String getUser(){
+            return this.username;
+        }
 }
