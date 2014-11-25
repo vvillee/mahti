@@ -1,5 +1,6 @@
 package org.mahti.herbarium.controller;
 
+import org.mahti.herbarium.repository.PlantRepository;
 import org.mahti.herbarium.service.DefaultService;
 import org.mahti.herbarium.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ public class DefaulController {
     
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private PlantRepository plantRepository;
     
     @RequestMapping(method = RequestMethod.GET)
     public String view(Model model) {
@@ -39,6 +43,10 @@ public class DefaulController {
     public String user(Model model) {
         return "redirect:/users/" + userService.getAuthenticatedUser().getUsername();
     }
-    
+
+    @RequestMapping(value ="upload",method = RequestMethod.GET)
+    public String upload(Model model) {
+        return "upload";
+    }
     
 }

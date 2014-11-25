@@ -34,6 +34,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .permitAll();
+
+        // disable csrf so we can upload pictures
+        // recheck this what it really means...
+        http.csrf().disable();
     }
 
     @Configuration

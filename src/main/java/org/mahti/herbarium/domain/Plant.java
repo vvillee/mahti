@@ -8,39 +8,24 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Entity
 public class Plant extends AbstractPersistable<Long> {
 
-	@NotBlank
-	private String PictureName;  // overal picture name, example "Roses in Finland."
-	@NotBlank
-	private String PlantName;  // name in common language for quiz
+    // optional:
+    // private String kingdom;  // kunta?
+    // private String order;  //  lahko
+    // private String tribe;  //  heimo
 
-	// optionals
-	// private String LatinName;  // name in latin language for quiz
-	// private String description;
+    // requested
+    // private String family;  //  heimo
+    // private String genus;  // suku
+    // private String species;  // laji
 
 	@Lob  // tells database to reserve big blocks, optional, runs faster
-	private byte[] picture;
+	private byte[] content;
 
-	public String getPictureName() {
-		return PictureName;
+	public byte[] getContent() {
+		return content;
 	}
 
-	public void setPictureName(String PictureName) {
-		this.PictureName = PictureName;
-	}
-
-	public String getPlantName() {
-		return PlantName;
-	}
-
-	public void setPlantName(String PlantName) {
-		this.PlantName = PlantName;
-	}
-
-	public byte[] getPicture() {
-		return picture;
-	}
-
-	public void setPicture(byte[] picture) {
-		this.picture = picture;
+	public void setContent(byte[] content) {
+		this.content = content;
 	}
 }
