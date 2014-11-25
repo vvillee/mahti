@@ -20,7 +20,7 @@
 
             <!-- sign up form -->
             <div>
-                    <form method="post" action="#" th:action="@{/users}" th:object="${user}">
+                <form method="post" action="#" th:action="@{/users}" th:object="${user}">
                     <label>Email: <input type="text" name="email" placeholder="Email" /></label><br/>
                     <label>Name: <input type="text" name="name" placeholder="Name" /></label><br/>
                     <label>Username: <input type="text" name="username" placeholder="Username" /></label><br/>
@@ -39,7 +39,7 @@
         <!-- /.container -->
 
         <div th:include="fragment/common :: dialogFragment" />
-        <div th:cindlue="fragment/common :: scriptFragment" />
+        <div th:include="fragment/common :: scriptFragment" />
 
 
     </body>
