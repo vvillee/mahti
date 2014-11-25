@@ -18,39 +18,44 @@
                 </div>
             </div>
             <!-- /.row -->
+            <h2 class="page-header">Pictures</h2>
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        
+                        <div th:if="${#lists.isEmpty(plants)}">No pictures yet</div>
                         <div th:each="plant : ${plants}">
-                             <img th:src="@{/plants/{id}/content(id=${plant.id})}"/>
+                            <div class="col-md-3 portfolio-item">
+                                <a th:href="@{/plants/{id}(id=${plant.id})}">
+                                    <img style="height:auto; width:auto; max-width:200px; max-height:100px;" th:src="@{/plants/{id}/content(id=${plant.id})}"/>
+                                </a>
+                            </div>
                         </div>
-                        
-                        
-
-                        <h2 class="page-header">Add new content</h2>
-
-                        <form method="POST" action="/plants" enctype="multipart/form-data">
-                            <input type="file" name="file" id="file"/>
-                            <input type="hidden" name="username" id="username" value="" th:attr="value=${username}"/>
-                            <input type="submit" value="Add"/>
-                        </form>
-
-
-
 
                     </div>
                 </div>
+                <div>
+                    <h2 class="page-header">Add new content</h2>
+
+                    <form method="POST" action="/plants" enctype="multipart/form-data">
+                        <input type="file" name="file" id="file"/>
+                        <input type="hidden" name="username" id="username" value="" th:attr="value=${username}"/>
+                        <input type="submit" value="Add"/>
+                    </form>
+
+
+
 
 
                 </div>
-                <footer th:include="fragment/common :: footerFragment" />
 
             </div>
-            <!-- /.container -->
+            <footer th:include="fragment/common :: footerFragment" />
 
-            <div th:include="fragment/common :: dialogFragment" />
-            <div th:include="fragment/common :: scriptFragment" />
+        </div>
+        <!-- /.container -->
+
+        <div th:include="fragment/common :: dialogFragment" />
+        <div th:include="fragment/common :: scriptFragment" />
 
 
     </body>

@@ -55,11 +55,5 @@ public class UserController {
         return "user";
     }
 
-    @RequestMapping(value = "{username}/{imageId}")
-    @ResponseBody
-    public byte[] getPicture(@PathVariable long imageId) {
-        Plant plant = plantRepository.getOne(imageId);
-        return plant.getContent();
-    }
 
 }
