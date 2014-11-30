@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/users")
@@ -27,7 +26,7 @@ public class UserController {
     private PlantRepository plantRepository;
 
     @PostConstruct
-    public void init(){
+    public void init() {
         User user = new User();
         user.setUsername("test");
         user.setPassword("test");
@@ -35,8 +34,7 @@ public class UserController {
         user.setEmail("test@test.com");
         userRepository.save(user);
     }
-    
-    
+
     @RequestMapping(method = RequestMethod.POST)
     public String create(@Valid @ModelAttribute User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -54,6 +52,5 @@ public class UserController {
         model.addAttribute("plants", plantRepository.findByUsername(username));
         return "user";
     }
-
 
 }
