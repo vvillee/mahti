@@ -16,7 +16,7 @@
                     <h1 class="page-header">Login</h1>
                     <small>Please log in</small>
 
-                    <div th:if="${#httpServletRequest.remoteUser} == null">
+                    <div id="login-form" th:if="${#httpServletRequest.remoteUser} == null">
 
                         <div th:if="${param.error}">
                             Invalid username and password.
