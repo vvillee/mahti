@@ -21,23 +21,15 @@ public class PlantController {
     private PlantRepository plantRepository;
 
     @RequestMapping(method = RequestMethod.GET)
-    public String redirect() {
+    public String showAllPlantsWithFilter() {
         return "redirect:/";
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String redirectToId(Model model, @PathVariable Long id) {
-        if (plantRepository.exists(id)) {
-            model.addAttribute("current", id);
-        }
-        if (plantRepository.exists(id + 1)) {
-            model.addAttribute("next", id + 1);
-        }
-        if (plantRepository.exists(id - 1)) {
-            model.addAttribute("previous", id - 1);
-        }
-        model.addAttribute("count", plantRepository.findAll().size());
-        return "upload";
+    public String viewSinglePlant(Model model, @PathVariable Long id) {
+        model.addAttribute("id", id);
+        model.addAttribute("plant", plantRepository.findOne(id));
+        return "plant";
     }
     
     @ResponseBody
