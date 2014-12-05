@@ -49,4 +49,9 @@ public class DefaulController {
         return "upload";
     }
     
+    @RequestMapping(value ="browse",method = RequestMethod.GET)
+    public String browse(Model model) {
+        return "browse";
+    }
+    
 }
