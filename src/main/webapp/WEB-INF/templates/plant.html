@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head th:include="fragment/common :: headerFragment" />
+
+    <body>
+
+        <div th:include="fragment/common :: navFragment" />
+
+        <!-- Page Content -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Daisy, Leucanthemum Vulgare <span class="badge pull-right">5</span><span class="glyphicon glyphicon-heart pull-right" style="font-size: 1.3em; padding-right: 5px;" /></div>
+                        <div class="panel-body">
+                            <img class="img-responsive" style="height:auto; width:auto; max-width:auto; max-height:auto; margin: 0 auto;" th:src="@{/plants/{id}/content(id=${plant.id})}"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Control panel</div>
+                                <div class="panel-body">
+                                    <button class="btn btn-primary btn-block btn-lg btn-danger"><span class="glyphicon glyphicon-heart" /> Like </button>
+                                    <button class="btn btn-primary btn-block btn-lg btn-success"><span class="glyphicon glyphicon-globe" /> Share</button>
+                                    <div>
+                                        <hr />
+                                        <button class="btn btn-block btn-warning">Edit</button>
+                                        <button class="btn btn-block btn-warning">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Facts</div>
+                                <div class="panel-body">
+                                    <p>This plant is identified!</p>
+                                    <table class="table table-condensed">
+                                        <tr>
+                                            <th class="success" colspan="2">Scientific classification</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Family</td>
+                                            <td>Asteraceae</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Genus</td>
+                                            <td>Leucanthemum</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Species</td>
+                                            <td>L. Vulgare</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="active" colspan="2">Binomial name</th>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">Leucanthemum Vulgare</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="active" colspan="2">Well-known name</th>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">Daisy</td>
+                                        </tr>
+                                    </table>
+                                    <table class="table table-condensed">
+                                        <tr>
+                                            <th class="success" colspan="2">Meta</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Identified</td>
+                                            <td>Yes</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Date</td>
+                                            <td>07.12.2014</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="active" colspan="2">GPS</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Latitude</td>
+                                            <td>60 10'15"</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Longitude</td>
+                                            <td>024 56'15"</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer th:include="fragment/common :: footerFragment" />
+
+        </div>
+        <!-- /.container -->
+
+        <div th:include="fragment/common :: dialogFragment" />
+        <div th:include="fragment/common :: scriptFragment" />
+
+
+    </body>
+
+</html>
