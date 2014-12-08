@@ -23,6 +23,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
+                .antMatchers("/browse").permitAll()
                 .antMatchers("/static/**").permitAll()
 		.antMatchers("/signup").anonymous()
 		.antMatchers("/users").anonymous()

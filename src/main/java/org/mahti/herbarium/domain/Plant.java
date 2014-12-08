@@ -8,21 +8,30 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Entity
 public class Plant extends AbstractPersistable<Long> {
 
-    // optional:
-    // private String kingdom;  // kunta?
-    // private String order;  //  lahko
-    // private String tribe;  //  heimo
+    // fields: date, location (GPS: lat&long)
 
-    // requested
-    // private String family;  //  heimo
-    // private String genus;  // suku
-    // private String species;  // laji
+    private boolean identified;
+
+    // names
+    private String name;  // kansankielellä
+    private String family;  //  heimo
+    private String genus;  // suku
+    private String species;  // laji
+    // binomial nomenclature: genus + species
 
 	@Lob  // tells database to reserve big blocks, optional, runs faster
 	private byte[] content;
         
-        //link to right table
-        private String username;
+    //link to right table
+    private String username;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
 	public byte[] getContent() {
 		return content;
@@ -32,10 +41,10 @@ public class Plant extends AbstractPersistable<Long> {
 		this.content = content;
 	}
         
-        public void setUser(String user){
-            this.username=user;
-        }
-        public String getUser(){
-            return this.username;
-        }
+    public void setUser(String user){
+        this.username=user;
+    }
+    public String getUser(){
+        return this.username;
+    }
 }

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head th:include="fragment/common :: headerFragment" />
+
+    <body>
+
+        <div th:include="fragment/common :: navFragment" />
+
+        <!-- Page Content -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><h3 class="panel-title">Filter</h3></div>
+                        <div class="panel-body">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 well">
+                    <span th:if="${#lists.isEmpty(plants)}">No pictures yet</span>
+                    <div th:each="plant : ${plants}">
+                        <div class="col-md-3 portfolio-item">
+                            <a th:href="@{/plants/{id}(id=${plant.id})}">
+                                <img style="height:auto; width:auto; max-width:200px; max-height:100px;" th:src="@{/plants/{id}/content(id=${plant.id})}"/>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <footer th:include="fragment/common :: footerFragment" />
+
+        </div>
+        <!-- /.container -->
+
+        <div th:include="fragment/common :: dialogFragment" />
+        <div th:include="fragment/common :: scriptFragment" />
+
+
+    </body>
+
+</html>

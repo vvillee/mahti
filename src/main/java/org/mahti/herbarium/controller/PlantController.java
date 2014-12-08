@@ -1,6 +1,7 @@
 package org.mahti.herbarium.controller;
 
 import java.io.IOException;
+import javax.transaction.Transactional;
 import org.mahti.herbarium.domain.Plant;
 import org.mahti.herbarium.repository.PlantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,16 +40,26 @@ public class PlantController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String postImage(@RequestParam("file") MultipartFile file, @RequestParam("username") String username) throws IOException {
+    public String postImage(@RequestParam("file") MultipartFile file
+            , @RequestParam("username") String username
+            , @RequestParam("name") String name) throws IOException {
         if (file.getContentType().equals("image/gif")
                 || file.getContentType().equals("image/png")
                 || file.getContentType().equals("image/jpg")
                 || file.getContentType().equals("image/jpeg")) {
             Plant plant = new Plant();
+            plant.setName(name);
             plant.setContent(file.getBytes());
             plant.setUser(username);
             plantRepository.save(plant);
         }
+        return "redirect:/user";
+    }
+
+    @Transactional
+    @RequestMapping(value = "/{id}/delete", method = RequestMethod.POST)
+    public String delete(@PathVariable Long id) {
+        plantRepository.delete(id);
         return "redirect:/user";
     }
 }
