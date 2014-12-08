@@ -25,6 +25,46 @@ public class Plant extends AbstractPersistable<Long> {
     //link to right table
     private String username;
 
+    public boolean isIdentified() {
+        return identified;
+    }
+
+    public void setIdentified(boolean identified) {
+        this.identified = identified;
+    }
+
+    public String getFamily() {
+        return family;
+    }
+
+    public void setFamily(String family) {
+        this.family = family;
+    }
+
+    public String getGenus() {
+        return genus;
+    }
+
+    public void setGenus(String genus) {
+        this.genus = genus;
+    }
+
+    public String getSpecies() {
+        return species;
+    }
+
+    public void setSpecies(String species) {
+        this.species = species;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String getName() {
         return name;
     }

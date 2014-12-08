@@ -42,15 +42,26 @@ public class PlantController {
     @RequestMapping(method = RequestMethod.POST)
     public String postImage(@RequestParam("file") MultipartFile file
             , @RequestParam("username") String username
+            , @RequestParam(required = false, defaultValue = "") String family
+            , @RequestParam(required = false, defaultValue = "") String genus
+            , @RequestParam(required = false, defaultValue = "") String species
             , @RequestParam("name") String name) throws IOException {
         if (file.getContentType().equals("image/gif")
                 || file.getContentType().equals("image/png")
                 || file.getContentType().equals("image/jpg")
                 || file.getContentType().equals("image/jpeg")) {
             Plant plant = new Plant();
-            plant.setName(name);
             plant.setContent(file.getBytes());
             plant.setUser(username);
+            plant.setFamily(family);
+            plant.setGenus(genus);
+            plant.setSpecies(species);
+            plant.setName(name);
+
+            if (true) {
+                
+            }
+
             plantRepository.save(plant);
         }
         return "redirect:/user";
