@@ -1,5 +1,6 @@
 package org.mahti.herbarium.domain;
 
+import java.math.BigInteger;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 import org.hibernate.validator.constraints.NotBlank;
@@ -10,6 +11,7 @@ public class Plant extends AbstractPersistable<Long> {
 
     // fields: date, location (GPS: lat&long)
 
+	private BigInteger likes;
     private boolean identified;
 
     // names
@@ -24,6 +26,14 @@ public class Plant extends AbstractPersistable<Long> {
         
     //link to right table
     private String username;
+
+	public BigInteger getLikes() {
+		return likes;
+	}
+
+	public void setLikes(BigInteger likes) {
+		this.likes = likes;
+	}
 
     public boolean isIdentified() {
         return identified;

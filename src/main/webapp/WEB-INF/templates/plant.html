@@ -12,9 +12,9 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="panel panel-default">
-                        <div class="panel-heading">Daisy, Leucanthemum Vulgare <span class="badge pull-right">5</span><span class="glyphicon glyphicon-heart pull-right" style="font-size: 1.3em; padding-right: 5px;" /></div>
+                        <div class="panel-heading"><span th:text="${plant.name}">Daisy</span>, <span th:text="${binomial}">Leucanthemum Vulgare</span> <span class="badge pull-right">5</span><span class="glyphicon glyphicon-heart pull-right" style="font-size: 1.3em; padding-right: 5px;" /></div>
                         <div class="panel-body">
-                            <img class="img-responsive" style="height:auto; width:auto; max-width:auto; max-height:auto; margin: 0 auto;" th:src="@{/plants/{id}/content(id=${plant.id})}"/>
+                            <img class="img-responsive" th:src="@{/plants/{id}/content(id=${plant.id})}"/>
                         </div>
                     </div>
                 </div>
@@ -28,8 +28,11 @@
                                     <button class="btn btn-primary btn-block btn-lg btn-success"><span class="glyphicon glyphicon-globe" /> Share</button>
                                     <div>
                                         <hr />
-                                        <button class="btn btn-block btn-warning">Edit</button>
-                                        <button class="btn btn-block btn-warning">Delete</button>
+										<!-- TODO make service for all kinds of plant manipulation -->
+										<form role="form" action="#" th:action="@{/plants/{id}/delete(id=${plant.id})}" method="POST">
+											<button type="submit" value="edit" class="btn btn-block btn-warning">Edit</button>
+											<button type="submit" value="delete" class="btn btn-block btn-warning">Delete</button>
+										</form>
                                     </div>
                                 </div>
                             </div>
@@ -40,34 +43,36 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">Facts</div>
                                 <div class="panel-body">
-                                    <p>This plant is identified!</p>
                                     <table class="table table-condensed">
                                         <tr>
-                                            <th class="success" colspan="2">Scientific classification</th>
+                                            <th class="success" colspan="2">Scientific classification 
+												<span th:if="${plant.identified}" class="label label-danger pull-right">Unidentfied</span>
+												<span th:if="!${plant.identified}" class="label label-success pull-right">Identified</span>
+											</th>
                                         </tr>
                                         <tr>
                                             <td>Family</td>
-                                            <td>Asteraceae</td>
+                                            <td th:text="${plant.family}">Asteraceae</td>
                                         </tr>
                                         <tr>
                                             <td>Genus</td>
-                                            <td>Leucanthemum</td>
+                                            <td th:text="${plant.genus}">Leucanthemum</td>
                                         </tr>
                                         <tr>
                                             <td>Species</td>
-                                            <td>L. Vulgare</td>
+                                            <td th:text="${plant.species}">L. Vulgare</td>
                                         </tr>
                                         <tr>
                                             <th class="active" colspan="2">Binomial name</th>
                                         </tr>
                                         <tr>
-                                            <td colspan="2">Leucanthemum Vulgare</td>
+                                            <td colspan="2" th:text="${binomial}">Leucanthemum Vulgare</td>
                                         </tr>
                                         <tr>
                                             <th class="active" colspan="2">Well-known name</th>
                                         </tr>
                                         <tr>
-                                            <td colspan="2">Daisy</td>
+                                            <td colspan="2" th:text="${plant.name}">Daisy</td>
                                         </tr>
                                     </table>
                                     <table class="table table-condensed">

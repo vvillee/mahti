@@ -1,6 +1,7 @@
 package org.mahti.herbarium.controller;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import javax.transaction.Transactional;
 import org.mahti.herbarium.domain.Plant;
 import org.mahti.herbarium.repository.PlantRepository;
@@ -28,8 +29,9 @@ public class PlantController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String viewSinglePlant(Model model, @PathVariable Long id) {
-        model.addAttribute("id", id);
-        model.addAttribute("plant", plantRepository.findOne(id));
+		Plant plant = plantRepository.findOne(id);
+        model.addAttribute("plant", plant);
+		model.addAttribute("binomial", plant.getGenus() + " " + plant.getSpecies());
         return "plant";
     }
     
@@ -51,6 +53,8 @@ public class PlantController {
                 || file.getContentType().equals("image/jpg")
                 || file.getContentType().equals("image/jpeg")) {
             Plant plant = new Plant();
+			plant.setIdentified(true);
+			plant.setLikes(BigInteger.ZERO);
             plant.setContent(file.getBytes());
             plant.setUser(username);
             plant.setFamily(family);
