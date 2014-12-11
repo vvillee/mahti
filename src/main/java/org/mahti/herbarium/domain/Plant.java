@@ -1,14 +1,17 @@
 package org.mahti.herbarium.domain;
 
 import java.math.BigInteger;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
-import org.hibernate.validator.constraints.NotBlank;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
 public class Plant extends AbstractPersistable<Long> {
 
+	// TODO
     // fields: date, location (GPS: lat&long)
 
 	private BigInteger likes;
@@ -24,8 +27,20 @@ public class Plant extends AbstractPersistable<Long> {
 	@Lob  // tells database to reserve big blocks, optional, runs faster
 	private byte[] content;
         
-    //link to right table
+    // TODO link to the right table
     private String username;
+
+    @Temporal(TemporalType.DATE)
+    private Date date;
+
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
 
 	public BigInteger getLikes() {
 		return likes;
@@ -94,7 +109,5 @@ public class Plant extends AbstractPersistable<Long> {
     public void setUser(String user){
         this.username=user;
     }
-    public String getUser(){
-        return this.username;
-    }
+
 }
