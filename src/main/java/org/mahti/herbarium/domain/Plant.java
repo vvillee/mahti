@@ -2,6 +2,7 @@ package org.mahti.herbarium.domain;
 
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.Temporal;
@@ -14,7 +15,14 @@ public class Plant extends AbstractPersistable<Long> {
 	// TODO
     // fields: date, location (GPS: lat&long)
 
+	private long correct;
+	private long incorrect;
+	// see who have voted and prevent them to vote again
+	List<User> usersVoted;  // or should be String username?
+
 	private BigInteger likes;
+	List<User> usersLiked;  // or should be String username?
+
     private boolean identified;
 
     // names
