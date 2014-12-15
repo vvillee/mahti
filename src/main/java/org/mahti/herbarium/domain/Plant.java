@@ -1,8 +1,6 @@
 package org.mahti.herbarium.domain;
 
-import java.math.BigInteger;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.Temporal;
@@ -12,13 +10,10 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Entity
 public class Plant extends AbstractPersistable<Long> {
 
-	// TODO
-    // fields: date, location (GPS: lat&long)
-
-	private long correct;
-	private long incorrect;
-	// see who have voted and prevent them to vote again
-	// List<User> usersVoted;  // or should be String username?
+    private long correct;
+    private long incorrect;
+    // see who have voted and prevent them to vote again
+    // List<User> usersVoted;  // or should be String username?
 
     private boolean identified;
 
@@ -29,23 +24,24 @@ public class Plant extends AbstractPersistable<Long> {
     private String species;  // laji
     // binomial nomenclature: genus + species
 
-	@Lob  // tells database to reserve big blocks, optional, runs faster
-	private byte[] content;
+    @Lob  // tells database to reserve big blocks, optional, runs faster
+    private byte[] content;
         
-    // TODO link to the right table
     private String username;
 
     @Temporal(TemporalType.DATE)
     private Date date;
 
+    // @TODO location (GPS: lat&long)
 
-	public Date getDate() {
-		return date;
-	}
 
-	public void setDate(Date date) {
-		this.date = date;
-	}
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
     public boolean isIdentified() {
         return identified;
@@ -95,13 +91,13 @@ public class Plant extends AbstractPersistable<Long> {
         this.name = name;
     }
 
-	public byte[] getContent() {
-		return content;
-	}
+    public byte[] getContent() {
+        return content;
+    }
 
-	public void setContent(byte[] content) {
-		this.content = content;
-	}
+    public void setContent(byte[] content) {
+        this.content = content;
+    }
         
     public void setUser(String user){
         this.username=user;
