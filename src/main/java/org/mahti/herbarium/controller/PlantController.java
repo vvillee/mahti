@@ -54,7 +54,6 @@ public class PlantController {
                 || file.getContentType().equals("image/jpeg")) {
             Plant plant = new Plant();
 			plant.setIdentified(true);
-			plant.setLikes(BigInteger.ZERO);
             plant.setContent(file.getBytes());
             plant.setUser(username);
             plant.setFamily(family);
