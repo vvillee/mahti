@@ -1,7 +1,9 @@
 package org.mahti.herbarium.domain;
 
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
@@ -32,6 +34,18 @@ public class User extends AbstractPersistable<Long>{
     
     @Length(max = 255)
     private String description;
+
+    @OneToMany
+    private List<Plant> plants;
+
+
+	public List<Plant> getPlants() {
+		return plants;
+	}
+
+	public void setPlants(List<Plant> plants) {
+		this.plants = plants;
+	}
 
     public String getUsername() {
         return username;

@@ -50,7 +50,7 @@ public class UserController {
         model.addAttribute("username", user.getUsername());
         model.addAttribute("name", user.getName());
         model.addAttribute("plants", plantRepository.findByUsername(username));
-        return "user";
+        return "upload";
     }
 
 }
