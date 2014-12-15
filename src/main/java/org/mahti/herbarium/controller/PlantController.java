@@ -2,7 +2,6 @@ package org.mahti.herbarium.controller;
 
 import java.io.IOException;
 import java.math.BigInteger;
-
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.security.Principal;
