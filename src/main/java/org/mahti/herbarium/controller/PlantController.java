@@ -1,6 +1,8 @@
 package org.mahti.herbarium.controller;
 
 import java.io.IOException;
+import java.math.BigInteger;
+import javax.transaction.Transactional;
 import org.mahti.herbarium.domain.Plant;
 import org.mahti.herbarium.repository.PlantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,23 +23,16 @@ public class PlantController {
     private PlantRepository plantRepository;
 
     @RequestMapping(method = RequestMethod.GET)
-    public String redirect() {
+    public String showAllPlantsWithFilter() {
         return "redirect:/";
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String redirectToId(Model model, @PathVariable Long id) {
-        if (plantRepository.exists(id)) {
-            model.addAttribute("current", id);
-        }
-        if (plantRepository.exists(id + 1)) {
-            model.addAttribute("next", id + 1);
-        }
-        if (plantRepository.exists(id - 1)) {
-            model.addAttribute("previous", id - 1);
-        }
-        model.addAttribute("count", plantRepository.findAll().size());
-        return "upload";
+    public String viewSinglePlant(Model model, @PathVariable Long id) {
+		Plant plant = plantRepository.findOne(id);
+        model.addAttribute("plant", plant);
+		model.addAttribute("binomial", plant.getGenus() + " " + plant.getSpecies());
+        return "plant";
     }
     
     @ResponseBody
@@ -47,16 +42,38 @@ public class PlantController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String postImage(@RequestParam("file") MultipartFile file, @RequestParam("username") String username) throws IOException {
+    public String postImage(@RequestParam("file") MultipartFile file
+            , @RequestParam("username") String username
+            , @RequestParam(required = false, defaultValue = "") String family
+            , @RequestParam(required = false, defaultValue = "") String genus
+            , @RequestParam(required = false, defaultValue = "") String species
+            , @RequestParam("name") String name) throws IOException {
         if (file.getContentType().equals("image/gif")
                 || file.getContentType().equals("image/png")
                 || file.getContentType().equals("image/jpg")
                 || file.getContentType().equals("image/jpeg")) {
             Plant plant = new Plant();
+			plant.setIdentified(true);
             plant.setContent(file.getBytes());
             plant.setUser(username);
+            plant.setFamily(family);
+            plant.setGenus(genus);
+            plant.setSpecies(species);
+            plant.setName(name);
+
+            if (true) {
+                
+            }
+
             plantRepository.save(plant);
         }
+        return "redirect:/user";
+    }
+
+    @Transactional
+    @RequestMapping(value = "/{id}/delete", method = RequestMethod.POST)
+    public String delete(@PathVariable Long id) {
+        plantRepository.delete(id);
         return "redirect:/user";
     }
 }

@@ -35,3 +35,11 @@ dist/
 nbdist/
 nbactions.xml
 nb-configuration.xml
+
+############
+# Eclipse  #
+############
+
+.classpath
+.project
+.settings/
