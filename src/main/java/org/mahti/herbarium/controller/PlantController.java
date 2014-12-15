@@ -1,10 +1,11 @@
 package org.mahti.herbarium.controller;
 
 import java.io.IOException;
-import java.math.BigInteger;
+import java.util.Date;
 import javax.transaction.Transactional;
 import org.mahti.herbarium.domain.Plant;
 import org.mahti.herbarium.repository.PlantRepository;
+import org.mahti.herbarium.service.PlantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +22,9 @@ public class PlantController {
 
     @Autowired
     private PlantRepository plantRepository;
+    
+    @Autowired
+    private PlantService plantService;
 
     @RequestMapping(method = RequestMethod.GET)
     public String showAllPlantsWithFilter() {
@@ -29,9 +33,9 @@ public class PlantController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String viewSinglePlant(Model model, @PathVariable Long id) {
-		Plant plant = plantRepository.findOne(id);
+        Plant plant = plantRepository.findOne(id);
         model.addAttribute("plant", plant);
-		model.addAttribute("binomial", plant.getGenus() + " " + plant.getSpecies());
+        model.addAttribute("binomial", plant.getGenus() + " " + plant.getSpecies());
         return "plant";
     }
     
@@ -76,4 +80,22 @@ public class PlantController {
         plantRepository.delete(id);
         return "redirect:/user";
     }
+    
+    @RequestMapping(value = "/{id}/comment", method = RequestMethod.POST)
+    public String postComment(
+            Model model, 
+            @PathVariable Long id, 
+            @RequestParam("userId") long commenterUserId,
+            @RequestParam("comment") String commentString) {
+        
+        plantService.addComment(id, commentString, new Date(), commenterUserId);
+        
+        Plant plant = plantRepository.findOne(id);        
+        model.addAttribute("plant", plant);
+        model.addAttribute("binomial", plant.getGenus() + " " + plant.getSpecies());
+        
+        return "plant";
+        
+    }
+    
 }
