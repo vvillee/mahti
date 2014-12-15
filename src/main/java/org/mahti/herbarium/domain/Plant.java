@@ -18,10 +18,7 @@ public class Plant extends AbstractPersistable<Long> {
 	private long correct;
 	private long incorrect;
 	// see who have voted and prevent them to vote again
-	List<User> usersVoted;  // or should be String username?
-
-	private BigInteger likes;
-	List<User> usersLiked;  // or should be String username?
+	// List<User> usersVoted;  // or should be String username?
 
     private boolean identified;
 
@@ -48,14 +45,6 @@ public class Plant extends AbstractPersistable<Long> {
 
 	public void setDate(Date date) {
 		this.date = date;
-	}
-
-	public BigInteger getLikes() {
-		return likes;
-	}
-
-	public void setLikes(BigInteger likes) {
-		this.likes = likes;
 	}
 
     public boolean isIdentified() {
