@@ -37,9 +37,9 @@ public class PlantController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String viewSinglePlant(Model model, @PathVariable Long id) {
-		Plant plant = plantRepository.findOne(id);
+        Plant plant = plantRepository.findOne(id);
         model.addAttribute("plant", plant);
-		model.addAttribute("binomial", plant.getGenus() + " " + plant.getSpecies());
+        model.addAttribute("binomial", plant.getGenus() + " " + plant.getSpecies());
         return "plant";
     }
 
@@ -47,12 +47,5 @@ public class PlantController {
     @RequestMapping(value = "/{id}/content", produces = "image/*")
     public byte[] showImage(@PathVariable Long id) {
         return plantRepository.findOne(id).getContent();
-    }
-
-    @Transactional
-    @RequestMapping(value = "/{id}/delete", method = RequestMethod.POST)
-    public String delete(@PathVariable Long id) {
-        plantRepository.delete(id);
-        return "redirect:/user";
     }
 }

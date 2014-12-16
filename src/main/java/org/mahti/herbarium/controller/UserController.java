@@ -98,4 +98,14 @@ public class UserController {
         return "redirect:/upload";
     }
 
+    @Transactional
+    @RequestMapping(value = "/{userId}/plants/{plantId}/delete", method = RequestMethod.POST)
+    public String delete(@PathVariable Long userId
+            , @PathVariable Long plantId) {
+        Plant plant = plantRepository.findOne(plantId);
+        plantRepository.delete(plant);
+        userRepository.findOne(userId).getPlants().remove(plant);
+        return "redirect:/upload";
+    }
+
 }
