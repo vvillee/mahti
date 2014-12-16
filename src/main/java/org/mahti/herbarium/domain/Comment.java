@@ -12,7 +12,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 public class Comment extends AbstractPersistable<Long> {
     
     @NotBlank
-    @Length(min = 1, max = 255)
+    @Length(min = 1, max = 512)
     private String comment;
     
     @Temporal(TemporalType.DATE)

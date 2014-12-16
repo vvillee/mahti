@@ -29,6 +29,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers(HttpMethod.GET, "/signup").anonymous()
 		.antMatchers(HttpMethod.POST, "/users").anonymous()
 		.antMatchers(HttpMethod.GET, "/plants/**").permitAll()
+		.antMatchers(HttpMethod.POST, "/plants/*/comment").authenticated()
                 .anyRequest().authenticated();
 
         http.formLogin()

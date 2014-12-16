@@ -9,14 +9,45 @@
 
         <!-- Page Content -->
         <div class="container">
-            <div class="row">
+            <div class="row plant-container">
                 <div class="col-md-8">
-                    <div class="panel panel-default">
-                        <div class="panel-heading"><span th:text="${plant.name}">Daisy</span>, <span th:text="${binomial}">Leucanthemum Vulgare</span> <span class="badge pull-right">5</span><span class="glyphicon glyphicon-heart pull-right" style="font-size: 1.3em; padding-right: 5px;" /></div>
-                        <div class="panel-body">
-                            <img class="img-responsive" th:src="@{/plants/{id}/content(id=${plant.id})}"/>
+                    <div class="row">
+                        <div class="panel panel-default">
+                            <div class="panel-heading"><span th:text="${plant.name}">Daisy</span>, <span th:text="${binomial}">Leucanthemum Vulgare</span> <span class="badge pull-right">5</span><span class="glyphicon glyphicon-heart pull-right" style="font-size: 1.3em; padding-right: 5px;" /></div>
+                            <div class="panel-body">
+                                <img class="img-responsive" th:src="@{/plants/{id}/content(id=${plant.id})}"/>
+                            </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="panel panel-default comments-container">                            
+                            <div class="panel-heading">Comments</div>
+                            <div class="panel-body comments-panel-body">
+                                <div th:if="${#lists.isEmpty(plant.comments)}">
+                                    <p>No comments yet!</p>
+                                </div>
+                                <div th:unless="${#lists.isEmpty(plant.comments)}">
+                                    <div class="comment-container" th:each="comment : ${plant.comments}">
+                                        <div class="comment-user-image"><img src="http://lorempixel.com/50/50/people/1" /></div>
+                                        <div class="comment-box">
+                                            <a href="">username</a><br/>
+                                            <span th:text="${comment.comment}">
+                                                Comment here
+                                            </span>
+                                        </div>                                   
+                                    </div>
+                                </div>
+                                <form method="post" class="form-inline" role="form" action="#" th:action="@{/plants/{id}/comment(id=${plant.id})}">
+                                    <div class="form-group">
+                                        <label class="sr-only" for="comment">Comment</label>
+                                        <input type="text" class="form-control" id="comment" th:name="comment" placeholder="Leave a comment..." pattern=".{1,512}"/>
+                                        <input type="hidden" id="username" th:name="username" th:value="${#httpServletRequest.remoteUser}" />
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>                    
                 </div>
                 <div class="col-md-4">
                     <div class="row">

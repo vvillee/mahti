@@ -35,7 +35,7 @@ public class PlantServiceTest {
         plant.setName("Voikukka");
         plantRepository.saveAndFlush(plant);
         
-        plantService.addComment(plant.getId(), COMMENT, new Date(), 1000);
+        plantService.addComment(plant.getId(), COMMENT, "test");
         
         Plant commentedPlant = plantRepository.findOne(plant.getId());
         assertEquals(commentedPlant.getComments().iterator().next().getComment(), COMMENT);

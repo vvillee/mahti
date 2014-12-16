@@ -11,12 +11,47 @@ body {
 }
 
 .masterjumbotron h1 {
-    font-size: 70px;
+    font-size: 60px;
 }
 
 @media (min-width: 768px) { 
     .masterjumbotron h1 {
         font-size: 120px;
+    }
+}
+
+.plant-container {
+    margin-top: 15px;
+}
+
+.comment-user-image {
+    float:left;
+}
+
+.comment-container {
+    margin-bottom: 15px;
+    min-height: 50px;
+}
+
+.comment-box {
+    margin-left: 65px;
+}
+
+@media (min-width: 768px){
+    #comment{
+        width: 643px;
+    }
+}
+
+@media (min-width: 992px){
+    #comment{
+        width: 540px;
+    }
+}
+
+@media (min-width: 1200px) { 
+    #comment {
+        width: 673px;
     }
 }
 

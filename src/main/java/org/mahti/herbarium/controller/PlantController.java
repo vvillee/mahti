@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.transaction.Transactional;
 import org.mahti.herbarium.domain.Plant;
 import org.mahti.herbarium.repository.PlantRepository;
+import org.mahti.herbarium.repository.UserRepository;
 import org.mahti.herbarium.service.PlantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -83,18 +84,13 @@ public class PlantController {
     
     @RequestMapping(value = "/{id}/comment", method = RequestMethod.POST)
     public String postComment(
-            Model model, 
             @PathVariable Long id, 
-            @RequestParam("userId") long commenterUserId,
+            @RequestParam("username") String commenterUsername,
             @RequestParam("comment") String commentString) {
         
-        plantService.addComment(id, commentString, new Date(), commenterUserId);
+        plantService.addComment(id, commentString, commenterUsername);
         
-        Plant plant = plantRepository.findOne(id);        
-        model.addAttribute("plant", plant);
-        model.addAttribute("binomial", plant.getGenus() + " " + plant.getSpecies());
-        
-        return "plant";
+        return "redirect:/plants/" + id;
         
     }
     
