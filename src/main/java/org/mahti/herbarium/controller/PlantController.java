@@ -50,45 +50,6 @@ public class PlantController {
     }
 
     @Transactional
-    @RequestMapping(value = "/{userId}/upload", method = RequestMethod.POST)
-    public String postImage(Model model
-            , @PathVariable Long userId
-            , @RequestParam("file") MultipartFile file
-            , @RequestParam(required = false, defaultValue = "") String family
-            , @RequestParam(required = false, defaultValue = "") String genus
-            , @RequestParam(required = false, defaultValue = "") String species
-            , @Valid @RequestParam("name") String name
-            ) throws IOException {
-
-        if (file.getContentType().equals("image/gif")
-                || file.getContentType().equals("image/png")
-                || file.getContentType().equals("image/jpg")
-                || file.getContentType().equals("image/jpeg")) {
-
-            Plant plant = new Plant();
-
-            if (family.trim().length() == 0
-                    || genus.trim().length() == 0
-                    || species.trim().length() == 0) {
-                plant.setIdentified(false);
-                    } else {
-                        plant.setIdentified(true);
-                    }
-
-            plant.setContent(file.getBytes());
-            plant.setFamily(family);
-            plant.setGenus(genus);
-            plant.setSpecies(species);
-            plant.setName(name);
-            plant = plantRepository.save(plant);
-
-            userRepository.findOne(userId).getPlants().add(plant);
-        }
-
-        return "redirect:/upload";
-    }
-
-    @Transactional
     @RequestMapping(value = "/{id}/delete", method = RequestMethod.POST)
     public String delete(@PathVariable Long id) {
         plantRepository.delete(id);
