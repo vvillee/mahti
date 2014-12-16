@@ -39,35 +39,20 @@ public class PlantTest {
     public void sizeOfRepository() throws Exception {
         assertEquals("Repository size in the beginning.", 0, plantRepository.count());
 
-        MockMultipartFile multipartFile = new MockMultipartFile("file", "../img/LeucanthemumVulgare.jpg", "image/jpg", "LeucanthemumVulgare".getBytes());
-
-        Plant plant = new Plant();
-        plant.setName("Daisy");
-        plant.setFamily("Asteraceae");
-        plant.setGenus("Leucanthemum");
-        plant.setSpecies("L. vulgare");
-        plant.setContent(multipartFile.getBytes());
-        plantRepository.save(plant);
-
+        addPlantDaisy();
         assertEquals("Repository size after first plant is saved to the repository.", 1, plantRepository.count());
 
-        multipartFile = new MockMultipartFile("file", "../img/AnemoneNemorosa.jpg", "image/jpg", "AnemoneNemorosa".getBytes());
-
-        plant = new Plant();
-        plant.setName("Windflower");
-        plant.setFamily("Ranunculales");
-        plant.setGenus("Anemone");
-        plant.setSpecies("A. nemorosa");
-        plant.setContent(multipartFile.getBytes());
-        plantRepository.save(plant);
-
+        addPlantWindflower();
         assertEquals("Repository size after second plant is saved to the repository.", 2, plantRepository.count());
+
+        plantRepository.deleteAll();
         
     }
 
     @Test
     public void firstPlantHasRightFieldsAndContent() throws Exception {
-        Plant plant = plantRepository.findOne(1L);
+        Long daisyId = addPlantDaisy();
+        Plant plant = plantRepository.findOne(daisyId);
         // Uncomment when you know how to compare contents
         // MockMultipartFile multipartFile = new MockMultipartFile("file", "../img/LeucanthemumVulgare.jpg", "image/jpg", "LeucanthemumVulgare".getBytes());
         // assertTrue("Contents not equal.", multipartFile.getBytes().equals(plant.getContent()));
@@ -78,22 +63,50 @@ public class PlantTest {
         assertEquals("Check species.", "L. vulgare", plant.getSpecies());
         // Just test if plant has some content
         assertTrue("Does content exist?", plant.getContent().length > 0);
+
+        plantRepository.deleteAll();
     }
 
     @Test
-    public void secondPlantHasRightFieldsAndContent() {
-        Plant plant = plantRepository.findOne(2L);
+    public void secondPlantHasRightFieldsAndContent() throws Exception {
+        addPlantDaisy();
+        Long WindflowerId = addPlantWindflower();
+        Plant plant = plantRepository.findOne(WindflowerId);
 
         assertEquals("Check name", "Windflower", plant.getName());
         assertEquals("Check family.", "Ranunculales", plant.getFamily());
         assertEquals("Check genus.", "Anemone", plant.getGenus());
         assertEquals("Check species.", "A. nemorosa", plant.getSpecies());
         assertTrue("Does content exist?", plant.getContent().length > 0);
+
+        plantRepository.deleteAll();
     }
 
     @After
     public void clearPlantRepository() {
         plantRepository.deleteAll();
+    }
+
+    private Long addPlantDaisy() throws Exception {
+        return addPlant("Daisy", "Asteraceae", "Leucanthemum", "L. vulgare", "../img/LeucanthemumVulgare.jpg", "LeucanthemumVulgare");
+    }
+
+    private Long addPlantWindflower() throws Exception {
+        return addPlant("Windflower", "Ranunculales", "Anemone", "A. nemorosa", "../img/AnemoneNemorosa.jpg", "AnemoneNemorosa");
+    }
+
+    private Long addPlant(String name, String family, String genus, String species, String fileUri, String fileName) throws Exception {
+        MockMultipartFile multipartFile = new MockMultipartFile("file", fileUri, "image/jpg", fileName.getBytes());
+
+        Plant plant = new Plant();
+        plant.setName(name);
+        plant.setFamily(family);
+        plant.setGenus(genus);
+        plant.setSpecies(species);
+        plant.setContent(multipartFile.getBytes());
+        plantRepository.save(plant);
+
+        return plant.getId();
     }
 
 
