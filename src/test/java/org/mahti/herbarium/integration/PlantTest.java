@@ -1,12 +1,9 @@
 package org.mahti.herbarium.integration;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mahti.herbarium.Application;
@@ -18,7 +15,6 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.web.multipart.MultipartFile;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
@@ -29,11 +25,6 @@ public class PlantTest {
     @Autowired
     private PlantRepository plantRepository;
 
-    /*
-    @Before
-    public static void setUp() {
-    }
-    */
 
     @Test
     public void sizeOfRepository() throws Exception {
@@ -44,9 +35,6 @@ public class PlantTest {
 
         addPlantWindflower();
         assertEquals("Repository size after second plant is saved to the repository.", 2, plantRepository.count());
-
-        plantRepository.deleteAll();
-        
     }
 
     @Test
@@ -63,8 +51,6 @@ public class PlantTest {
         assertEquals("Check species.", "L. vulgare", plant.getSpecies());
         // Just test if plant has some content
         assertTrue("Does content exist?", plant.getContent().length > 0);
-
-        plantRepository.deleteAll();
     }
 
     @Test
@@ -78,12 +64,10 @@ public class PlantTest {
         assertEquals("Check genus.", "Anemone", plant.getGenus());
         assertEquals("Check species.", "A. nemorosa", plant.getSpecies());
         assertTrue("Does content exist?", plant.getContent().length > 0);
-
-        plantRepository.deleteAll();
     }
 
     @After
-    public void clearPlantRepository() {
+    public void clear() {
         plantRepository.deleteAll();
     }
 
