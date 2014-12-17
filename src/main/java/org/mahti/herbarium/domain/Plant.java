@@ -3,7 +3,9 @@ package org.mahti.herbarium.domain;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -42,7 +44,9 @@ public class Plant extends AbstractPersistable<Long> {
     private Date date;
 
     // @TODO location (GPS: lat&long)
-
+    
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<Comment> comments;
 
     public Date getDate() {
         return date;
@@ -110,6 +114,14 @@ public class Plant extends AbstractPersistable<Long> {
         
     public void setUser(String user) {
         this.username=user;
+    }
+    
+    public List<Comment> getComments(){
+        return comments;
+    }
+    
+    public void setComments(List<Comment> comments){
+        this.comments = comments;
     }
 
 }

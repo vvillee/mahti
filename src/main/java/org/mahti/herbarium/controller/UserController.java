@@ -55,8 +55,9 @@ public class UserController {
         User user = userRepository.findByUsername(username);
         model.addAttribute("username", user.getUsername());
         model.addAttribute("name", user.getName());
-        model.addAttribute("plants", plantRepository.findByUsername(username));
-        return "upload";
+        model.addAttribute("userId", user.getId());
+        model.addAttribute("userPlants", userRepository.findOne(user.getId()).getPlants());
+        return "user";
     }
 
     @Transactional
@@ -107,5 +108,4 @@ public class UserController {
         userRepository.findOne(userId).getPlants().remove(plant);
         return "redirect:/upload";
     }
-
 }
