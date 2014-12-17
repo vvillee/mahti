@@ -20,7 +20,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="panel panel-default comments-container">                            
+                        <div class="panel panel-default comments-container">
                             <div class="panel-heading">Comments</div>
                             <div class="panel-body comments-panel-body">
                                 <div th:if="${#lists.isEmpty(plant.comments)}">
@@ -29,8 +29,8 @@
                                 <div th:unless="${#lists.isEmpty(plant.comments)}">
                                     <div class="comment-container" th:each="comment : ${plant.comments}">
                                         <div class="comment-user-image"><img src="http://lorempixel.com/50/50/people/1" /></div>
-                                        <div class="comment-box">
-                                            <a th:href="@{/users/{id}(id=${comment.username})}" th:text="${comment.username}">username</a><br/>
+                                        <div class="comment-box" th:each="entry : ${commenters}">
+                                            <a th:if="${entry.key == __${comment.userId}__}" th:href="@{/users/{username}(username=${entry.value})}" th:text="${entry.value}">username</a><br/>
                                             <span th:text="${comment.comment}">
                                                 Comment here
                                             </span>

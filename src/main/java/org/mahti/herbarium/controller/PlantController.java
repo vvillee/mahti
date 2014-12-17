@@ -1,12 +1,16 @@
 package org.mahti.herbarium.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.transaction.Transactional;
+import org.mahti.herbarium.domain.Comment;
 import org.mahti.herbarium.domain.Plant;
 import org.mahti.herbarium.repository.PlantRepository;
 import org.mahti.herbarium.repository.UserRepository;
 import org.mahti.herbarium.service.PlantService;
+import org.mahti.herbarium.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +30,9 @@ public class PlantController {
     
     @Autowired
     private PlantService plantService;
+    
+    @Autowired
+    private UserService userService;
 
     @RequestMapping(method = RequestMethod.GET)
     public String showAllPlantsWithFilter() {
@@ -37,6 +44,14 @@ public class PlantController {
         Plant plant = plantRepository.findOne(id);
         model.addAttribute("plant", plant);
         model.addAttribute("binomial", plant.getGenus() + " " + plant.getSpecies());
+        
+        List<Long> commentersUserIds = new ArrayList();
+        List<Comment> comments = plant.getComments();
+        for (Comment comment : comments){
+            commentersUserIds.add(comment.getUserId());
+        }
+        
+        model.addAttribute("commenters", userService.getUserIdUsernameRelation(commentersUserIds));
         return "plant";
     }
     
