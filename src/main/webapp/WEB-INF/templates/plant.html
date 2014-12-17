@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head th:include="fragment/common :: headerFragment" />
+
+    <body>
+
+        <div th:include="fragment/common :: navFragment" />
+
+        <!-- Page Content -->
+        <div class="container content">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="panel panel-default">
+                            <div class="panel-heading"><span th:text="${plant.name}">Daisy</span>, <span th:text="${binomial}">Leucanthemum Vulgare</span> <span class="badge pull-right">5</span><span class="glyphicon glyphicon-heart pull-right" style="font-size: 1.3em; padding-right: 5px;" /></div>
+                            <div class="panel-body">
+                                <img class="img-responsive" th:src="@{/plants/{id}/content(id=${plant.id})}"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="panel panel-default comments-container">
+                            <div class="panel-heading">Comments</div>
+                            <div class="panel-body comments-panel-body">
+                                <div th:if="${#lists.isEmpty(plant.comments)}">
+                                    <p>No comments yet!</p>
+                                </div>
+                                <div th:unless="${#lists.isEmpty(plant.comments)}">
+                                    <div class="comment-container" th:each="comment : ${plant.comments}">
+                                        <div class="comment-user-image"><img src="http://lorempixel.com/50/50/people/1" /></div>
+                                        <div class="comment-box" th:each="entry : ${commenters}">
+                                            <a th:if="${entry.key == __${comment.userId}__}" th:href="@{/users/{username}(username=${entry.value})}" th:text="${entry.value}">username</a>
+                                            <span class="comment-text" th:if="${entry.key == __${comment.userId}__}" th:text="${comment.comment}">
+                                                Comment here
+                                            </span>
+                                        </div>                                   
+                                    </div>
+                                </div>
+                                <form method="post" class="form-inline" role="form" action="#" th:action="@{/plants/{id}/comment(id=${plant.id})}">
+                                    <div class="form-group">
+                                        <label class="sr-only" for="comment">Comment</label>
+                                        <input type="text" class="form-control" id="comment" th:name="comment" placeholder="Leave a comment..." pattern=".{1,512}"/>
+                                        <input type="hidden" id="username" th:name="username" th:value="${#httpServletRequest.remoteUser}" />
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Control panel</div>
+                                <div class="panel-body">
+                                    <button class="btn btn-primary btn-block btn-lg btn-danger"><span class="glyphicon glyphicon-heart" /> Like </button>
+                                    <button class="btn btn-primary btn-block btn-lg btn-success"><span class="glyphicon glyphicon-globe" /> Share</button>
+                                    <div>
+                                        <hr />
+										<!-- TODO make service for all kinds of plant manipulation -->
+										<form role="form" action="#" th:action="@{/plants/{id}/delete(id=${plant.id})}" method="POST">
+											<button type="submit" value="edit" class="btn btn-block btn-warning">Edit</button>
+											<button type="submit" value="delete" class="btn btn-block btn-warning">Delete</button>
+										</form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Facts</div>
+                                <div class="panel-body">
+                                    <table class="table table-condensed">
+                                        <tr>
+                                            <th class="success" colspan="2">Scientific classification 
+												<span th:if="!${plant.identified}" class="label label-danger pull-right">Unidentfied</span>
+												<span th:if="${plant.identified}" class="label label-success pull-right">Identified</span>
+											</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Family</td>
+                                            <td th:text="${plant.family}">Asteraceae</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Genus</td>
+                                            <td th:text="${plant.genus}">Leucanthemum</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Species</td>
+                                            <td th:text="${plant.species}">L. Vulgare</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="active" colspan="2">Binomial name</th>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" th:text="${binomial}">Leucanthemum Vulgare</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="active" colspan="2">Well-known name</th>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" th:text="${plant.name}">Daisy</td>
+                                        </tr>
+                                    </table>
+                                    <table class="table table-condensed">
+                                        <tr>
+                                            <th class="success" colspan="2">Meta</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Identified</td>
+                                            <td>Yes</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Date</td>
+                                            <td>07.12.2014</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="active" colspan="2">GPS</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Latitude</td>
+                                            <td>60 10'15"</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Longitude</td>
+                                            <td>024 56'15"</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer th:include="fragment/common :: footerFragment" />
+
+        </div>
+        <!-- /.container -->
+
+        <div th:include="fragment/common :: dialogFragment" />
+        <div th:include="fragment/common :: scriptFragment" />
+
+
+    </body>
+
+</html>

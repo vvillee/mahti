@@ -12,10 +12,16 @@
         <title>Herbarium</title>
 
         <!-- Bootstrap Core CSS -->
-        <link href="../../webapp/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
         <!-- Custom CSS -->
-        <link href="../../webapp/static/bootstrap/css/4-col-portfolio.css" rel="stylesheet" />
+        <link href="/static/bootstrap/css/4-col-portfolio.css" rel="stylesheet" />
+
+		<!-- Fileinput -->
+        <link href="/static/bootstrap/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+        
+        <!-- Herbarium CSS -->
+        <link href="/static/css/herbarium.css" rel="stylesheet" />
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -43,38 +49,39 @@
                     </div>
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav">
-                            <li th:if="${#httpServletRequest.remoteUser} == null">
-                                <a th:href="@{/login}" data-toggle="modal">Login</a>
-                            </li>
-                            <li th:if="${#httpServletRequest.remoteUser} != null">
+                        <ul class="nav navbar-nav">                            
+                            <!--<li th:if="${#httpServletRequest.remoteUser} != null">
                                 <a th:href="@{/user}" data-toggle="modal" th:inline="text">[[${#httpServletRequest.remoteUser}]]</a>
-                            </li>
-                            <li>
-                                <a href="#">Services</a>
-                            </li>
-                            <li>
-                                <a href="#">Contact</a>
-                            </li>
-                            <li th:if="${#httpServletRequest.remoteUser} != null">
-                                <a href="#" onclick="document.forms['logout'].submit();" data-toggle="modal">Log out</a>
-                            </li>
+                            </li>-->
+                            <li><a href="/browse">Browse</a></li>
+                            <li th:if="${#httpServletRequest.remoteUser} != null"> <a href="/upload">Upload</a> </li>
                         </ul>
-                        <form name="logout" action="#" th:action="@{/logout}" method="post">
-                            <input type="hidden" value="Sign Out"/>
-                        </form>
-                        <!-- this breaks popup?
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hi User! <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                        <li><a href="#">Preference</a></li>
-                                        <li><a href="#">Sign out</a></li>
-                                </ul>
-                        </li>
-    
-                    </ul>
-                        -->
+
+                        <!-- show this if not signed in -->
+
+                        <ul class="nav navbar-nav navbar-right" th:if="${#httpServletRequest.remoteUser} == null">
+                            <li><a href="#login" data-toggle="modal">Login</a></li>
+                        </ul>
+
+                        <!-- show this if signed in -->
+                        <div th:if="${#httpServletRequest.remoteUser} != null">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="dropdown">
+                                    <a href="/#" class="dropdown-toggle" data-toggle="dropdown" th:inline="text">Hi [[${#httpServletRequest.remoteUser}]]! <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="/user">Profile</a></li>
+                                        <li><a href="/#">Preferences</a></li>
+                                        <li><a href="/upload">Upload</a></li>
+                                        <li><a href="/#" onclick="document.forms['logout'].submit();">Log out</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+
+                            <form name="logout" action="#" th:action="@{/logout}" method="post">
+                                <input type="hidden" value="Sign Out"/>
+                            </form>
+                        </div>
+
                     </div>
                     <!-- /.navbar-collapse -->
                 </div>
@@ -216,47 +223,30 @@
         </div>
         <!-- /.container -->
 
+        <!-- Modal -->
         <div id="dialogFragment" th:fragment="dialogFragment">
-            <div class ="modal fade" id = "login" role = "dialog">
-                <div class ="modal-dialog">
-                    <div class ="modal-content">
+            <div class="modal fade" id="login" role="dialog">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
                         <div class ="modal-header">
                             <h4>Login</h4>
                         </div>
-                        <div class = "modal-body">
-
-
-
-                            <div th:if="${#httpServletRequest.remoteUser} == null">
-
-                                <div th:if="${param.error}">
-                                    Invalid username and password.
+                        <div class="modal-body">
+                            <form th:action="@{/login}" method="post">
+                                <div class="form-group">
+                                    <label for="username">Username</label>
+                                    <input type="text" id="username" name="username" class="form-control" placeholder="Username" />
                                 </div>
-                                <div th:if="${param.logout}">
-                                    You have been logged out.
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="password" id="password" name="password" class="form-control" placeholder="Password" />
                                 </div>
-                                <form th:action="@{/login}" method="post">
-                                    <div><label> User Name : <input type="text" name="username"/> </label></div>
-                                    <div><label> Password: <input type="password" name="password"/> </label></div>
-                                    <div><input type="submit" value="Sign In"/></div>
-                                </form>
-                            </div>
-                            <div th:if="${#httpServletRequest.remoteUser} != null">
-                                <p th:inline="text">You are logged in as [[${#httpServletRequest.remoteUser}]]<br/>
-                                    <a th:href="@{/}">Go home [[${#httpServletRequest.remoteUser}]] &raquo;</a>
-                                </p>
-
-                                <form th:action="@{/logout}" method="post">
-                                    <input type="submit" value="Logout"/>
-                                </form>
-                            </div>
-                        </div>
-
-
-
-                        <div class ="modal-footer">
-                            <a class ="btn btn-default" data-dismiss = "modal"> Cancel </a>
-                            <a class ="btn btn-primary" data-dismiss = "modal"> Ok </a>
+                                <!-- lets see if we implement remember me -->
+                                <!-- <div class="checkbox"> <label for=""><input type="checkbox">Remember me</label> </div> -->
+                                <button type="submit" class="btn btn-primary">Sign in</button>
+                                <button class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            </form>
+                            <p class='help-block'>Don't have an account yet? <a th:href="@{/signup}">Sign up &raquo;</a></p>
                         </div>
                     </div>
                 </div>
@@ -265,10 +255,13 @@
 
         <div id="scriptFragment" th:fragment="scriptFragment">
             <!-- jQuery -->
-            <script src="../../webapp/static/bootstrap/js/jquery.js"></script>
+            <script src="/static/bootstrap/js/jquery.js"></script>
 
             <!-- Bootstrap Core JavaScript -->
-            <script src="../../webapp/static/bootstrap/js/bootstrap.min.js"></script>
+            <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+
+            <script src="/static/bootstrap/js/fileinput.js"></script>
+
         </div>
 
     </body>

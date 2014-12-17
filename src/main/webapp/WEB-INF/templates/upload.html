@@ -8,13 +8,45 @@
         <div th:include="fragment/common :: navFragment" />
 
             <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="page-header">Add new plant</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8">
+                        <form role="form" method="POST" action="#" th:action="@{users/{userId}/upload(userId=${userId})}" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="name">*Name:</label>
+                                <input class="form-control" type="text" name="name" placeholder="Name" />
+                            </div>
+                            <div class="form-group">
+                                <label for="family">Family:</label>
+                                <input class="form-control" type="text" name="family" placeholder="Family" />
+                            </div>
+                            <div class="form-group">
+                                <label for="genus">Genus:</label>
+                                <input class="form-control" type="text" name="genus" placeholder="Genus" />
+                            </div>
+                            <div class="form-group">
+                                <label for="species">Species:</label>
+                                <input class="form-control" type="text" name="species" placeholder="Species" />
+                            </div>
+                            <p class="text-warning">If genus or family are not present, this plant will be marked as unidentified.</p>
+                            <p class="text-warning">* name is required</p>
+                            <input type="file" class="file" name="file" id="file" date-preview-file-type="text" />
+                        </form>
+                    </div>
+                    <div class="col-sm-3"></div>
+                </div>
 
                 <div class="row">
                     <div class="col-md-12">
                         <h2 class="page-header">Your Recent uploads</h2>
                     </div>
                 </div>
-                
+            
                 <div class="row" th:if="${#lists.isEmpty(userPlants)}">
                     <div class="col-md-12">
                         <p class="help-block">You don't have any plants in your collection!</p>
