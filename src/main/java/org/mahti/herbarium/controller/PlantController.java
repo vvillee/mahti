@@ -2,7 +2,6 @@ package org.mahti.herbarium.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.transaction.Transactional;
 import org.mahti.herbarium.domain.Comment;
@@ -34,6 +33,9 @@ public class PlantController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @RequestMapping(method = RequestMethod.GET)
     public String showAllPlantsWithFilter() {
         return "redirect:/";
@@ -52,9 +54,10 @@ public class PlantController {
         }
         
         model.addAttribute("commenters", userService.getUserIdUsernameRelation(commentersUserIds));
+
         return "plant";
     }
-    
+
     @ResponseBody
     @RequestMapping(value = "/{id}/content", produces = "image/*")
     public byte[] showImage(@PathVariable Long id) {

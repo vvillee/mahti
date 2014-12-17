@@ -1,12 +1,13 @@
 package org.mahti.herbarium.controller;
 
+import org.mahti.herbarium.repository.PlantRepository;
+import org.mahti.herbarium.repository.UserRepository;
 import org.mahti.herbarium.service.DefaultService;
 import org.mahti.herbarium.service.PlantService;
 import org.mahti.herbarium.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -22,6 +23,9 @@ public class DefaulController {
 
     @Autowired
     private PlantService plantService;
+
+    @Autowired
+    private UserRepository userRepository;
     
     private static final int FRONT_PAGE_LATEST_PLANT_COUNT = 4; 
     
@@ -50,6 +54,9 @@ public class DefaulController {
 
     @RequestMapping(value ="upload", method = RequestMethod.GET)
     public String upload(Model model) {
+        Long userId = userService.getAuthenticatedUser().getId();
+        model.addAttribute("userId", userId);
+        model.addAttribute("userPlants", userRepository.findOne(userId).getPlants());
         return "upload";
     }
     

@@ -7,33 +7,68 @@
 
         <div th:include="fragment/common :: navFragment" />
 
-        <!-- Page Content -->
-        <div class="container">
-            
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2 class="page-header">Your current images: (<span th:text="${count}">count</span> images)</h2>
-
-                    <div th:if="${current != null}">
-                        <img th:src="@{/plants/{id}/content(id=${current})}"/>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="page-header">Add new plant</h2>
                     </div>
-
-                    <div th:if="${previous != null}">
-                        <a th:href="@{/plants/{id}(id=${previous})}">Previous</a>
-                    </div>
-
-                    <div th:if="${next != null}">
-                        <a th:href="@{/plants/{id}(id=${next})}">Next</a>
-                    </div>
-
-                    <h2 class="page-header">Add new content</h2>
-
-                    <form method="POST" action="/plants" enctype="multipart/form-data">
-                        <input type="file" name="file" id="file"/>
-                        <input type="submit" value="Moarr!"/>
-                    </form>
                 </div>
-            </div>
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8">
+                        <form role="form" method="POST" action="#" th:action="@{users/{userId}/upload(userId=${userId})}" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="name">*Name:</label>
+                                <input class="form-control" type="text" name="name" placeholder="Name" />
+                            </div>
+                            <div class="form-group">
+                                <label for="family">Family:</label>
+                                <input class="form-control" type="text" name="family" placeholder="Family" />
+                            </div>
+                            <div class="form-group">
+                                <label for="genus">Genus:</label>
+                                <input class="form-control" type="text" name="genus" placeholder="Genus" />
+                            </div>
+                            <div class="form-group">
+                                <label for="species">Species:</label>
+                                <input class="form-control" type="text" name="species" placeholder="Species" />
+                            </div>
+                            <p class="text-warning">If genus or family are not present, this plant will be marked as unidentified.</p>
+                            <p class="text-warning">* name is required</p>
+                            <input type="file" class="file" name="file" id="file" date-preview-file-type="text" />
+                        </form>
+                    </div>
+                    <div class="col-sm-3"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="page-header">Recent uploads</h2>
+                    </div>
+                </div>
+            
+                <div class="row" th:if="${#lists.isEmpty(plants)}">
+                    <div class="col-md-12">
+                        <p class="help-block">You don't have any plants in your collection!</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-6 col-md-3" th:each="plant : ${userPlants}">
+                        <div class="thumbnail">
+                            <a th:href="@{/plants/{id}(id=${plant.id})}">
+                                <img style="max-width:150px; max-height:150px" th:src="@{/plants/{id}/content(id=${plant.id})}"/>
+                            </a>
+                            <div class="caption">
+                                <h3 th:text="${plant.name}">Name</h3>
+                                <form role="form" action="#" th:action="@{/users/{userId}/plants/{plantId}/delete(plantId=${plant.id},userId=${userId})}" method="POST">
+                                    <!-- <input type="hidden" name="_method" value="DELETE" /> -->
+                                    <button type="submit" value="Delete" class="btn btn-danger btn-block">Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             <hr />
 
