@@ -15,18 +15,29 @@
         <!-- Page Content -->
         <div class="container">
 
-            <!-- Plants Row -->
-            <div class="row" th:if="${#lists.isEmpty(plants)}">
-                <div class="col-lg-12">
-                    <p>Not yet discovered any plants!</p>
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="page-header">Recent uploads</h2>
                 </div>
             </div>
-            
-            <div class="row" th:unless="${#lists.isEmpty(plants)}">
-                <div class="col-md-3 portfolio-item" th:each="plant : ${plants}">
-                    <a th:href="@{/plants/{id}(id=${plant.id})}">
-                        <img style="height:auto; width:auto; max-width:200px; max-height:100px;" th:src="@{/plants/{id}/content(id=${plant.id})}" />
-                    </a>
+
+            <!-- Plants Row -->
+            <div class="row" th:if="${#lists.isEmpty(plants)}">
+                <div class="col-md-12">
+                    <p class="help-block">You don't have any plants in your collection!</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-6 col-md-3" th:each="plant : ${plants}">
+                    <div class="thumbnail">
+                        <a th:href="@{/plants/{id}(id=${plant.id})}">
+                            <img style="max-width:150px; max-height:150px" th:src="@{/plants/{id}/content(id=${plant.id})}"/>
+                        </a>
+                        <div class="caption">
+                            <h3 th:text="${plant.name}">Name</h3>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- /.row -->
