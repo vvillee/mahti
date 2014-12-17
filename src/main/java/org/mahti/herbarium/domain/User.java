@@ -39,13 +39,13 @@ public class User extends AbstractPersistable<Long>{
     private List<Plant> plants;
 
 
-	public List<Plant> getPlants() {
-		return plants;
-	}
+    public List<Plant> getPlants() {
+            return plants;
+    }
 
-	public void setPlants(List<Plant> plants) {
-		this.plants = plants;
-	}
+    public void setPlants(List<Plant> plants) {
+            this.plants = plants;
+    }
 
     public String getUsername() {
         return username;
