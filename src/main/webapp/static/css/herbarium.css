@@ -37,6 +37,10 @@ body {
     margin-left: 65px;
 }
 
+.comment-text {
+    display:block;
+}
+
 @media (min-width: 768px){
     #comment{
         width: 643px;

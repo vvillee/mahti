@@ -30,8 +30,8 @@
                                     <div class="comment-container" th:each="comment : ${plant.comments}">
                                         <div class="comment-user-image"><img src="http://lorempixel.com/50/50/people/1" /></div>
                                         <div class="comment-box" th:each="entry : ${commenters}">
-                                            <a th:if="${entry.key == __${comment.userId}__}" th:href="@{/users/{username}(username=${entry.value})}" th:text="${entry.value}">username</a><br/>
-                                            <span th:text="${comment.comment}">
+                                            <a th:if="${entry.key == __${comment.userId}__}" th:href="@{/users/{username}(username=${entry.value})}" th:text="${entry.value}">username</a>
+                                            <span class="comment-text" th:if="${entry.key == __${comment.userId}__}" th:text="${comment.comment}">
                                                 Comment here
                                             </span>
                                         </div>                                   
