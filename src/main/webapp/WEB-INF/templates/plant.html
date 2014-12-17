@@ -8,8 +8,8 @@
         <div th:include="fragment/common :: navFragment" />
 
         <!-- Page Content -->
-        <div class="container">
-            <div class="row plant-container">
+        <div class="container content">
+            <div class="row">
                 <div class="col-md-8">
                     <div class="row">
                         <div class="panel panel-default">
@@ -30,7 +30,7 @@
                                     <div class="comment-container" th:each="comment : ${plant.comments}">
                                         <div class="comment-user-image"><img src="http://lorempixel.com/50/50/people/1" /></div>
                                         <div class="comment-box">
-                                            <a href="">username</a><br/>
+                                            <a th:href="@{/users/{id}(id=${comment.username})}" th:text="${comment.username}">username</a><br/>
                                             <span th:text="${comment.comment}">
                                                 Comment here
                                             </span>

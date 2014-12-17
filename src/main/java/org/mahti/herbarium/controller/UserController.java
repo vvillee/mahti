@@ -2,7 +2,6 @@ package org.mahti.herbarium.controller;
 
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
-import org.mahti.herbarium.domain.Plant;
 import org.mahti.herbarium.domain.User;
 import org.mahti.herbarium.repository.PlantRepository;
 import org.mahti.herbarium.repository.UserRepository;
@@ -52,5 +51,4 @@ public class UserController {
         model.addAttribute("plants", plantRepository.findByUsername(username));
         return "user";
     }
-
 }

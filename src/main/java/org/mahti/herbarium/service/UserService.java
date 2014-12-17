@@ -13,9 +13,8 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
     
-    public User getAuthenticatedUser(){
-        
+    public User getAuthenticatedUser(){        
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return userRepository.findByUsername(authentication.getName());
+        return userRepository.findByUsername(authentication.getName());        
     }
 }

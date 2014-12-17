@@ -10,16 +10,16 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
 public class Comment extends AbstractPersistable<Long> {
-    
+
     @NotBlank
     @Length(min = 1, max = 512)
     private String comment;
-    
+
     @Temporal(TemporalType.DATE)
     private Date dateAdded;
-    
+
     private long userId;
-    
+
     private long plantId;
 
     public String getComment() {
