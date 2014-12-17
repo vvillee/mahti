@@ -39,6 +39,8 @@ public class PlantServiceTest {
         
         Plant commentedPlant = plantRepository.findOne(plant.getId());
         assertEquals(commentedPlant.getComments().iterator().next().getComment(), COMMENT);
+        
+        plantRepository.delete(plant);
     
     }
     
