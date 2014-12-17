@@ -1,14 +1,21 @@
 package org.mahti.herbarium.domain;
 
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
 public class Plant extends AbstractPersistable<Long> {
+
+	// TODO
+    // fields: date, location (GPS: lat&long)
 
     private long correct;
     private long incorrect;
@@ -18,6 +25,8 @@ public class Plant extends AbstractPersistable<Long> {
     private boolean identified;
 
     // names
+    @NotBlank
+    @Length(min = 2, max = 30)
     private String name;  // kansankielellä
     private String family;  //  heimo
     private String genus;  // suku
@@ -99,7 +108,7 @@ public class Plant extends AbstractPersistable<Long> {
         this.content = content;
     }
         
-    public void setUser(String user){
+    public void setUser(String user) {
         this.username=user;
     }
 
