@@ -6,8 +6,10 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mahti.herbarium.Application;
+import org.mahti.herbarium.domain.Comment;
 import org.mahti.herbarium.domain.Plant;
 import org.mahti.herbarium.repository.PlantRepository;
+import org.mahti.herbarium.repository.UserRepository;
 import org.mahti.herbarium.service.PlantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -25,9 +27,13 @@ public class PlantServiceTest {
     private PlantRepository plantRepository;
     
     @Autowired
+    private UserRepository userRepository;
+    
+    @Autowired
     private PlantService plantService;
     
     private final static String COMMENT = "kommentti";
+    private final static String USERNAME = "test";
     
     private final static String[] PLANTNAMES = {
             "Voikukka",
@@ -45,10 +51,13 @@ public class PlantServiceTest {
         plant.setName(PLANTNAMES[0]);
         plantRepository.saveAndFlush(plant);
         
-        plantService.addComment(plant.getId(), COMMENT, "test");
+        plantService.addComment(plant.getId(), COMMENT, USERNAME);
         
         Plant commentedPlant = plantRepository.findOne(plant.getId());
-        assertEquals(commentedPlant.getComments().iterator().next().getComment(), COMMENT);
+        Comment comment = commentedPlant.getComments().iterator().next();
+        assertEquals(COMMENT, comment.getComment());
+        assertEquals(userRepository.findByUsername(USERNAME).getId().longValue(), comment.getUserId());
+        assertEquals(plant.getId().longValue(), comment.getPlantId());
         
         plantRepository.delete(plant);
     
