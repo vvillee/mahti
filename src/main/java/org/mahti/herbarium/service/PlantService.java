@@ -2,7 +2,6 @@ package org.mahti.herbarium.service;
 
 import java.util.Date;
 import java.util.List;
-import javax.transaction.Transactional;
 import org.mahti.herbarium.domain.Comment;
 import org.mahti.herbarium.domain.Plant;
 import org.mahti.herbarium.repository.CommentRepository;

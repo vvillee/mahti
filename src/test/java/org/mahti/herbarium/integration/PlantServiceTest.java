@@ -1,6 +1,7 @@
 package org.mahti.herbarium.integration;
 
-import java.util.Date;
+import java.util.Arrays;
+import java.util.List;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,11 +29,20 @@ public class PlantServiceTest {
     
     private final static String COMMENT = "kommentti";
     
+    private final static String[] PLANTNAMES = {
+            "Voikukka",
+            "Leskenlehti",
+            "Valkovuokko",
+            "Auringonkukka",
+            "Päivänkakkara",
+            "Sinikello",
+            "Rairuoho"};
+    
     @Test
     public void testAddComment(){
         
         Plant plant = new Plant();
-        plant.setName("Voikukka");
+        plant.setName(PLANTNAMES[0]);
         plantRepository.saveAndFlush(plant);
         
         plantService.addComment(plant.getId(), COMMENT, "test");
@@ -42,6 +52,39 @@ public class PlantServiceTest {
         
         plantRepository.delete(plant);
     
+    }
+    
+    @Test
+    public void testGetLatestPlantsTotalPages(){
+    
+        for (String plantName : Arrays.asList(PLANTNAMES)){
+            Plant plant = new Plant();
+            plant.setName(plantName);
+            plantRepository.save(plant);
+        }
+        
+        assertEquals(3, plantService.getLatestPlantsTotalPages(3));
+        
+        plantRepository.deleteAll();
+    }
+    
+    @Test
+    public void testGetLatestPlants(){
+    
+        for (String plantName : Arrays.asList(PLANTNAMES)){
+            Plant plant = new Plant();
+            plant.setName(plantName);
+            plantRepository.save(plant);
+        }
+        
+        List<Plant> secondPageOfPlants = plantService.getLatestPlants(1,3);
+        
+        assertEquals(3, secondPageOfPlants.size());
+        assertEquals(PLANTNAMES[3], secondPageOfPlants.get(0).getName());
+        assertEquals(PLANTNAMES[4], secondPageOfPlants.get(1).getName());
+        assertEquals(PLANTNAMES[5], secondPageOfPlants.get(2).getName());
+        
+        plantRepository.deleteAll();
     }
     
 }
