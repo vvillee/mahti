@@ -23,24 +23,33 @@ public class UserTest {
     @Autowired
     private UserRepository userRepository;
     
+    private static final String USER_NAME = "Hemuli Kasvitieteilijä";
+    private static final String USER_USERNAME = "hemuli";
+    private static final String USER_DESCRIPTION = "Viimeinkin se kasvi on minun!";
+    private static final String USER_EMAIL = "hemuli@muumilaakso.com";
+    private static final String USER_PASSWORD = "herbaario";
+    
     @Test
     public void testSaveUser() {
         
-        User retrieved = userRepository.findByUsername("hemuli");
+        User retrieved = userRepository.findByUsername(USER_USERNAME);
         assertNull(retrieved);
         
         User user = new User();
-        user.setName("Hemuli Kasvitieteilijä");
-        user.setUsername("hemuli");
-        user.setDescription("Viimeinkin se kasvi on minun!");
-        user.setEmail("hemuli@muumilaakso.com");
-        user.setPassword("herbaario");
+        user.setName(USER_NAME);
+        user.setUsername(USER_USERNAME);
+        user.setDescription(USER_DESCRIPTION);
+        user.setEmail(USER_EMAIL);
+        user.setPassword(USER_PASSWORD);
         
         userRepository.save(user);
 
-        retrieved = userRepository.findByUsername("hemuli");
+        retrieved = userRepository.findByUsername(USER_USERNAME);
         assertNotNull(retrieved);
-        assertEquals("Hemuli Kasvitieteilijä", retrieved.getName());
+        assertEquals(USER_NAME, retrieved.getName());
+        assertEquals(USER_USERNAME, retrieved.getUsername());
+        assertEquals(USER_DESCRIPTION, retrieved.getDescription());
+        assertEquals(USER_EMAIL, retrieved.getEmail());
         
         userRepository.delete(user);
     }

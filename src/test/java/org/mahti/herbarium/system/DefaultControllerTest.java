@@ -1,4 +1,4 @@
-package org.mahti.herbarium.controller;
+package org.mahti.herbarium.system;
 
 import org.junit.Assert;
 import org.junit.Before;
